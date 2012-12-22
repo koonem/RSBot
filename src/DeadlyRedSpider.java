@@ -43,7 +43,7 @@ import org.powerbot.game.api.Manifest;
 //http://pastie.org/private/jsdkwmxcvds1kpxtvxra (v0.2)
 //http://pastie.org/private/6fki2nil6qjh6hblp53iaw (v0.3)
 
-@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.3 )
+@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.3)
 public class DeadlyRedSpider extends ActiveScript implements PaintListener, MouseListener{
 
 	private static Filter<NPC> SPIDER_FILTER = new Filter<NPC>() {
