@@ -28,6 +28,7 @@ import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.util.Random;
 import org.powerbot.game.api.util.Timer;
+import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.interactive.Player;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
@@ -43,16 +44,14 @@ import org.powerbot.game.api.Manifest;
 //http://pastie.org/private/jsdkwmxcvds1kpxtvxra (v0.2)
 //http://pastie.org/private/6fki2nil6qjh6hblp53iaw (v0.3)
 
-@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.3)
+@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.4, topic=882944)
 public class DeadlyRedSpider extends ActiveScript implements PaintListener, MouseListener{
 
 	private static Filter<NPC> SPIDER_FILTER = new Filter<NPC>() {
-
 		@Override
 		public boolean accept(NPC npc) {
-			return npc.getId() == 63 && !npc.isInCombat() && npc.getAnimation() == -1;
+			return npc.getId() == 63 && !npc.isInCombat() && npc.getAnimation() == -1 && npc.getLocation().distanceTo() < 14.2D;
 		}
-		
 	};
 	
 	private Node[] NODE_LIST = {new TargetFinder(this), new AbilityUser(this)};
@@ -132,7 +131,7 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
 
     private final Color color1 = new Color(0, 0, 0);
     private final Color color2 = new Color(250, 250, 250);
-    private final Color color3 = new Color(60, 60, 60, 20);
+    private final Color color3 = new Color(40, 40, 40, 0);
 
     private final BasicStroke stroke1 = new BasicStroke(5);
 
@@ -154,7 +153,7 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
         Graphics2D g = (Graphics2D)g1;
         if(paintShown)
         {
-	        g.setColor(new Color(230,211,128));
+	        g.setColor(new Color(150,211-80,128-80));
 	        g.drawLine(Mouse.getX() - 5, Mouse.getY() - 5, Mouse.getX() + 5, Mouse.getY() + 5);
 	        g.drawLine(Mouse.getX() - 5, Mouse.getY() + 5, Mouse.getX() + 5, Mouse.getY() - 5);
 	        g.fillRect(6, 344+y, 506, 129);
@@ -290,6 +289,7 @@ class TargetFinder extends Node
 		NPC SPIDER_TARGET = NPCs.getNearest(instance.getFilter());
 		if(SPIDER_TARGET == null) 
 		{
+			Walking.walk(new Tile(3175, 9889, 0).randomize(1, 1));
 			instance.setNode(null);
 			return;	
 		}
@@ -333,7 +333,7 @@ class AbilityUser extends Node
 	@Override
 	public void execute() {
 		instance.setNode(this);
-		if(instance.getTarget() == null || (instance.getTarget() != null && !instance.getTarget().validate()))
+		if(instance.getTarget() == null || (instance.getTarget() != null && !instance.getTarget().validate()) || (instance.getTarget() != null && instance.getTarget().getLocation().distanceTo() > 2.0D))
 		{
 			instance.setNode(null);
 			return;
@@ -354,9 +354,11 @@ class AbilityUser extends Node
 			return;
 		}*/
 		ActionBar.Slot REJUV_SLOT = ActionBar.getSlotWithAbility(ActionBar.Defence_Abilities.REJUVENATE);
-		if(REJUV_SLOT == null){ 
+		if(REJUV_SLOT == null)
+		{ 
 			instance.setNode(null);
-			return;}
+			return;
+		}
 		if(DeadlyRedSpider.getHealthPercent(Players.getLocal().get()) <= 65)
 		{
 			REJUV_ASAP = true;
