@@ -356,8 +356,8 @@ class AbilityUser extends Node
 			for(int i = 0; i < 12; i++)
 			{
 				ActionBar.Ability a = ActionBar.getAbilityAt(i);
-				if(a == null) continue;
-				if(a.getAbilityType() == ActionBar.AbiltiyType.ULTIMATE && ActionBar.getSlotWithAbility(a).isAvailable() && !REJUV_ASAP && Players.getLocal().getInteracting().getHpPercent() > 25)
+				if(a == null || Players.getLocal().getInteracting() == null) continue;
+				if(a.getAbilityType() == ActionBar.AbiltiyType.ULTIMATE && ActionBar.getSlot(i).isAvailable() && !REJUV_ASAP && Players.getLocal().getInteracting().getHpPercent() > 25)
 				{
 					ActionBar.getSlotWithAbility(a).activate(true);
 					Task.sleep(Random.nextInt(0, 25));
