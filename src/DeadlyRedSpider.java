@@ -102,11 +102,9 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
 		{
 			for(Node n : NODE_LIST)
 			{
-				//System.out.println("Tried activating: "+n.toString());
 				if(n.activate())
 				{
 					n.execute();
-					//System.out.println("Activated: "+n.toString());
 					break;
 				}
 			}
@@ -120,7 +118,6 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
 		return Random.nextInt(100, 200);
 	}
 	
-    //START: Code generated using Enfilade's Easel
     private Image getImage(String url) {
         try {
             return ImageIO.read(new URL(url));
@@ -185,8 +182,7 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
 	        g.setColor(color3);
 	        g.fillRect(10, 348+y, 499, 123);
     	}
-    }
-    //END: Code generated using Enfilade's Easel
+    }  
 	
 	public Filter<NPC> getFilter()
 	{
@@ -239,27 +235,19 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseEntered(MouseEvent arg0) {		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mousePressed(MouseEvent arg0) {		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mouseReleased(MouseEvent arg0) {		
 	}
 
 
@@ -289,7 +277,7 @@ class TargetFinder extends Node
 		NPC SPIDER_TARGET = NPCs.getNearest(instance.getFilter());
 		if(SPIDER_TARGET == null) 
 		{
-			Walking.walk(new Tile(3175, 9889, 0).randomize(1, 1));
+			Walking.walk(new Tile(3176, 9883, 0).randomize(1, 1));
 			instance.setNode(null);
 			return;	
 		}
@@ -348,11 +336,6 @@ class AbilityUser extends Node
 				return;
 			}
 		}
-		/*if(instance.getTarget().getName().startsWith("*")) 
-		{
-			instance.setTarget(null);
-			return;
-		}*/
 		ActionBar.Slot REJUV_SLOT = ActionBar.getSlotWithAbility(ActionBar.Defence_Abilities.REJUVENATE);
 		if(REJUV_SLOT == null)
 		{ 
