@@ -37,7 +37,7 @@ public class BonePicker extends ActiveScript implements PaintListener, MessageLi
 		bonesBuried = 0;
 		startTime = System.currentTimeMillis();
 		timer.reset();
-		Mouse.setSpeed(Mouse.Speed.VERY_FAST);
+		Mouse.setSpeed(Mouse.Speed.FAST);
 	}
 	
 	@Override
