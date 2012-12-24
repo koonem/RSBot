@@ -11,12 +11,13 @@ import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Random;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 import org.powerbot.game.api.wrappers.node.Item;
 
-@Manifest( authors = {"harrynoob"}, name = "BonePicker", version = 0.1)
+@Manifest( authors = {"harrynoob"}, name = "BonePicker", version = 0.2)
 public class BonePicker extends ActiveScript implements PaintListener, MessageListener{
 
 	public static final int BONES_ID = 526;
@@ -28,6 +29,7 @@ public class BonePicker extends ActiveScript implements PaintListener, MessageLi
 	final int xNorm = 565;
 	final int yNorm = 390;
 	long startTime;
+	boolean burying;
 	Timer timer = new Timer(0);
 	
 	public void onStart()
@@ -41,22 +43,26 @@ public class BonePicker extends ActiveScript implements PaintListener, MessageLi
 	@Override
 	public int loop() {
 		if(Players.getLocal().isMoving()){ return Random.nextInt(150, 500);}
-		if(Players.getLocal().getAnimation() == 18008 || Inventory.getCount(BONES_ID ) > 1) {
+		burying = (Inventory.getCount(BONES_ID) > 0 && Inventory.getCount() == 28) || (burying && Inventory.getCount(BONES_ID) > 0);
+		if(burying) {
 			dropBone();
 			return Random.nextInt(250, 500);
 		}
-		pickBone();
+		else
+		{
+			pickBone();
+		}
 		return Random.nextInt(500, 1000);
 	}
 	
+	
 	public void pickBone()
 	{
-		GroundItem[] GROUND_BONES = GroundItems.getLoaded(10, BONES_ID);
-		if(GROUND_BONES != null){
-			if(GROUND_BONES.length > 0)
-			{
-				GROUND_BONES[0].interact("Take", "Bones");
-			}
+		GroundItem GROUND_BONES = GroundItems.getNearest(BONES_ID);
+		if(GROUND_BONES != null)
+		{
+			if(!GROUND_BONES.isOnScreen()) Camera.turnTo(GROUND_BONES);
+			GROUND_BONES.interact("Take", "Bones");
 		}
 	}
 	
@@ -79,7 +85,7 @@ public class BonePicker extends ActiveScript implements PaintListener, MessageLi
 				xp = (int)(bonesBuried * 4.5);
 			}
 		}
-	}
+	}	
 
 	@Override
 	public void onRepaint(Graphics g) {
