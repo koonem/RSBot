@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import org.powerbot.game.api.methods.input.Keyboard;
 import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.api.util.Filter;
@@ -44,7 +46,7 @@ import org.powerbot.game.api.Manifest;
 //http://pastie.org/private/jsdkwmxcvds1kpxtvxra (v0.2)
 //http://pastie.org/private/6fki2nil6qjh6hblp53iaw (v0.3)
 
-@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.4, topic=882944)
+@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.5, topic=882944, website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DeadlyRedSpider extends ActiveScript implements PaintListener, MouseListener{
 
 	private static Filter<NPC> SPIDER_FILTER = new Filter<NPC>() {
@@ -54,7 +56,9 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
 		}
 	};
 	
-	private Node[] NODE_LIST = {new TargetFinder(this), new AbilityUser(this)};
+	public final int[] FOOD_IDS = {333, 351, 329, 361, 379, 365, 373, 7946, 385, 697, 391, 15266, 15272};
+	
+	private Node[] NODE_LIST = {new TargetFinder(this), new AbilityUser(this), new FoodEater(this)};
 	private Node currentNode;
 	private NPC target;
 	private Timer timer;
@@ -148,6 +152,7 @@ public class DeadlyRedSpider extends ActiveScript implements PaintListener, Mous
     public void onRepaint(Graphics g1) {
 		xpHour = (int) ((getExpGain() * 3600000D) / (System.currentTimeMillis() - startTime));
         Graphics2D g = (Graphics2D)g1;
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if(paintShown)
         {
 	        g.setColor(new Color(150,211-80,128-80));
@@ -376,6 +381,35 @@ class AbilityUser extends Node
 		REJUV_ASAP = false;
 		instance.setNode(null);
 	}
+}
+
+
+class FoodEater extends Node
+{
+	private DeadlyRedSpider instance;
+	
+	public FoodEater(DeadlyRedSpider drs)
+	{
+		this.instance = drs;
+	}
+	
+	public boolean activate()
+	{
+		return DeadlyRedSpider.getHealthPercent(Players.getLocal().get()) < 50 && Inventory.getCount(instance.FOOD_IDS) > 0;
+	}
+	
+	public void execute()
+	{
+		instance.setNode(this);
+		if(Inventory.getItem(instance.FOOD_IDS) != null && Inventory.getItem(instance.FOOD_IDS).getWidgetChild() != null && Inventory.getItem(instance.FOOD_IDS).getWidgetChild().validate())
+		{
+			Inventory.getItem(instance.FOOD_IDS).getWidgetChild().interact("Eat");
+			Task.sleep(100);
+		}
+		instance.setNode(null);
+	}
+	
+	
 }
 
 /**
