@@ -46,7 +46,7 @@ import org.powerbot.game.api.Manifest;
 //http://pastie.org/private/jsdkwmxcvds1kpxtvxra (v0.2)
 //http://pastie.org/private/6fki2nil6qjh6hblp53iaw (v0.3)
 
-@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.5, topic=882944, website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.51, topic=882944, website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DeadlyRedSpider extends ActiveScript implements PaintListener, MouseListener{
 
 	private static Filter<NPC> SPIDER_FILTER = new Filter<NPC>() {
@@ -270,8 +270,9 @@ class TargetFinder extends Node
 	@Override
 	public boolean activate() {
 		return Players.getLocal() != null && Players.getLocal().getAnimation() == -1
-				&& !Players.getLocal().isMoving() && 
-				(instance.getTarget() == null || (instance.getTarget() != null && !instance.getTarget().validate())
+				&& Players.getLocal().getInteracting() == null
+				&& !Players.getLocal().isMoving() 
+				&& (instance.getTarget() == null || (instance.getTarget() != null && !instance.getTarget().validate())
 				|| Players.getLocal().isIdle());
 	}
 
@@ -287,21 +288,24 @@ class TargetFinder extends Node
 			return;	
 		}
 		Camera.turnTo(SPIDER_TARGET);
-		if(!SPIDER_TARGET.isInCombat() && !SPIDER_TARGET.getName().startsWith("*"))
+		if(SPIDER_TARGET.validate())
 		{
-			if(!SPIDER_TARGET.isOnScreen()) 
+			if(!SPIDER_TARGET.isInCombat() && !SPIDER_TARGET.getName().startsWith("*"))
 			{
-				Walking.walk(SPIDER_TARGET);
-				instance.setNode(null);
-				return;
-			}
-			if(!SPIDER_TARGET.interact("Attack", SPIDER_TARGET.getName()))
+				if(!SPIDER_TARGET.isOnScreen()) 
 				{
-				Camera.turnTo(SPIDER_TARGET);
-				Task.sleep(Random.nextInt(0, 25));
-				SPIDER_TARGET.interact("Attack", SPIDER_TARGET.getName());
+					Walking.walk(SPIDER_TARGET);
+					instance.setNode(null);
+					return;
 				}
-			instance.setTarget(SPIDER_TARGET);
+				if(!SPIDER_TARGET.interact("Attack", SPIDER_TARGET.getName()))
+					{
+					Camera.turnTo(SPIDER_TARGET);
+					Task.sleep(Random.nextInt(0, 25));
+					SPIDER_TARGET.interact("Attack", SPIDER_TARGET.getName());
+					}
+				instance.setTarget(SPIDER_TARGET);
+			}
 		}
 		instance.setNode(null);
 	}
