@@ -17,7 +17,10 @@ public class FoodEater extends Node {
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
-
+		if(Inventory.getItem(Variables.FOOD_IDS).getWidgetChild() != null && Inventory.getItem(Variables.FOOD_IDS).getWidgetChild().validate())
+		{
+			Inventory.getItem(Variables.FOOD_IDS).getWidgetChild().interact("Eat");
+		}
 	}
 
 }

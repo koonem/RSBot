@@ -212,7 +212,7 @@ public class Actionbar
         ITEM
     }
  
-    public enum AbiltiyType
+    public enum AbilityType
     {
         BASIC,
         THRESHOLD,
@@ -227,30 +227,30 @@ public class Actionbar
  
         public int getCoolDown();
  
-        public AbiltiyType getAbilityType();
+        public AbilityType getAbilityType();
     }
  
     public enum Attack_Abilities implements Ability
     {
-        SLICE(17, "Slice", 5, AbiltiyType.BASIC),
-        SLAUGHTER(113, "Slaughter", 30, AbiltiyType.THRESHOLD),
-        OVERPOWER(161, "Overpower", 30, AbiltiyType.ULTIMATE),
-        HAVOC(65, "Havoc", 10, AbiltiyType.BASIC),
-        BACKHAND(97, "BAckhand", 15, AbiltiyType.BASIC),
-        SMASH(81, "Smash", 10, AbiltiyType.BASIC),
-        BARGE(33, "Barge", 20, AbiltiyType.BASIC),
-        FLURRY(129, "Flurry", 20, AbiltiyType.THRESHOLD),
-        SEVER(49, "Sever", 30, AbiltiyType.BASIC),
-        HURRICANE(145, "Hurricane", 20, AbiltiyType.THRESHOLD),
-        MASSACRE(177, "Massacre", 60, AbiltiyType.ULTIMATE),
-        METEOR_STRIKE(193, "Meteor Strike", 60, AbiltiyType.ULTIMATE);
+        SLICE(17, "Slice", 5, AbilityType.BASIC),
+        SLAUGHTER(113, "Slaughter", 30, AbilityType.THRESHOLD),
+        OVERPOWER(161, "Overpower", 30, AbilityType.ULTIMATE),
+        HAVOC(65, "Havoc", 10, AbilityType.BASIC),
+        BACKHAND(97, "BAckhand", 15, AbilityType.BASIC),
+        SMASH(81, "Smash", 10, AbilityType.BASIC),
+        BARGE(33, "Barge", 20, AbilityType.BASIC),
+        FLURRY(129, "Flurry", 20, AbilityType.THRESHOLD),
+        SEVER(49, "Sever", 30, AbilityType.BASIC),
+        HURRICANE(145, "Hurricane", 20, AbilityType.THRESHOLD),
+        MASSACRE(177, "Massacre", 60, AbilityType.ULTIMATE),
+        METEOR_STRIKE(193, "Meteor Strike", 60, AbilityType.ULTIMATE);
  
         private int id;
         private String name;
         private int coolDown;
-        private AbiltiyType abiltiyType;
+        private AbilityType abiltiyType;
  
-        Attack_Abilities(final int id, final String name, final int coolDown, final AbiltiyType abiltiyType)
+        Attack_Abilities(final int id, final String name, final int coolDown, final AbilityType abiltiyType)
         {
             this.id = id;
             this.name = name;
@@ -277,7 +277,7 @@ public class Actionbar
         }
  
         @Override
-        public AbiltiyType getAbilityType()
+        public AbilityType getAbilityType()
         {
             return this.abiltiyType;
         }
@@ -285,25 +285,25 @@ public class Actionbar
  
     public enum Strength_Abilities implements Ability
     {
-        KICK(34, "Kick", 15, AbiltiyType.BASIC),
-        PUNISH(50, "Punish", 5, AbiltiyType.BASIC),
-        DISMEMBER(18, "Dismember", 30, AbiltiyType.BASIC),
-        FURY(66, "Fury", 20, AbiltiyType.BASIC),
-        DESTROY(146, "Destroy", 20, AbiltiyType.THRESHOLD),
-        QUAKE(130, "Quake", 20, AbiltiyType.THRESHOLD),
-        BERSERK(162, "Berserk", 60, AbiltiyType.ULTIMATE),
-        CLEAVE(98, "Cleave", 10, AbiltiyType.BASIC),
-        ASSAULT(114, "Assault", 30, AbiltiyType.THRESHOLD),
-        DECIMATE(82, "Decimate", 10, AbiltiyType.BASIC),
-        PULVERISE(194, "Pulverise", 60, AbiltiyType.ULTIMATE),
-        FRENZY(178, "Frenzy", 60, AbiltiyType.ULTIMATE);
+        KICK(34, "Kick", 15, AbilityType.BASIC),
+        PUNISH(50, "Punish", 5, AbilityType.BASIC),
+        DISMEMBER(18, "Dismember", 30, AbilityType.BASIC),
+        FURY(66, "Fury", 20, AbilityType.BASIC),
+        DESTROY(146, "Destroy", 20, AbilityType.THRESHOLD),
+        QUAKE(130, "Quake", 20, AbilityType.THRESHOLD),
+        BERSERK(162, "Berserk", 60, AbilityType.ULTIMATE),
+        CLEAVE(98, "Cleave", 10, AbilityType.BASIC),
+        ASSAULT(114, "Assault", 30, AbilityType.THRESHOLD),
+        DECIMATE(82, "Decimate", 10, AbilityType.BASIC),
+        PULVERISE(194, "Pulverise", 60, AbilityType.ULTIMATE),
+        FRENZY(178, "Frenzy", 60, AbilityType.ULTIMATE);
  
         private int id;
         private String name;
         private int coolDown;
-        private AbiltiyType abiltiyType;
+        private AbilityType abiltiyType;
  
-        Strength_Abilities(final int id, final String name, final int coolDown, final AbiltiyType abiltiyType)
+        Strength_Abilities(final int id, final String name, final int coolDown, final AbilityType abiltiyType)
         {
             this.id = id;
             this.name = name;
@@ -330,7 +330,7 @@ public class Actionbar
         }
  
         @Override
-        public AbiltiyType getAbilityType()
+        public AbilityType getAbilityType()
         {
             return this.abiltiyType;
         }
@@ -338,25 +338,25 @@ public class Actionbar
  
     public enum Ranged_Abilities implements Ability
     {
-        PIERCING_SHOT(21, "Piercing Shot", 5, AbiltiyType.BASIC),
-        SNAP_SHOT(117, "Snap Shot", 20, AbiltiyType.THRESHOLD),
-        DEADSHOT(197, "Deadshot", 30, AbiltiyType.ULTIMATE),
-        SNIPE(89, "Snipe", 10, AbiltiyType.BASIC),
-        BINDING_SHOT(37, "Binding Shot", 15, AbiltiyType.BASIC),
-        FRAGMENTATION_SHOT(85, "Fragmentation Shot", 30, AbiltiyType.BASIC),
-        ESCAPE(53, "Escape", 20, AbiltiyType.BASIC),
-        RAPID_FIRE(133, "Rapid Fire", 20, AbiltiyType.THRESHOLD),
-        RICOCHET(101, "Ricochet", 10, AbiltiyType.BASIC),
-        BOMBARDMENT(149, "Bombardment", 30, AbiltiyType.THRESHOLD),
-        INCENDIARY_SHOT(165, "Incendiary Shot", 60, AbiltiyType.ULTIMATE),
-        UNLOAD(181, "Unload", 60, AbiltiyType.ULTIMATE);
+        PIERCING_SHOT(21, "Piercing Shot", 5, AbilityType.BASIC),
+        SNAP_SHOT(117, "Snap Shot", 20, AbilityType.THRESHOLD),
+        DEADSHOT(197, "Deadshot", 30, AbilityType.ULTIMATE),
+        SNIPE(89, "Snipe", 10, AbilityType.BASIC),
+        BINDING_SHOT(37, "Binding Shot", 15, AbilityType.BASIC),
+        FRAGMENTATION_SHOT(85, "Fragmentation Shot", 30, AbilityType.BASIC),
+        ESCAPE(53, "Escape", 20, AbilityType.BASIC),
+        RAPID_FIRE(133, "Rapid Fire", 20, AbilityType.THRESHOLD),
+        RICOCHET(101, "Ricochet", 10, AbilityType.BASIC),
+        BOMBARDMENT(149, "Bombardment", 30, AbilityType.THRESHOLD),
+        INCENDIARY_SHOT(165, "Incendiary Shot", 60, AbilityType.ULTIMATE),
+        UNLOAD(181, "Unload", 60, AbilityType.ULTIMATE);
  
         private int id;
         private String name;
         private int coolDown;
-        private AbiltiyType abiltiyType;
+        private AbilityType abiltiyType;
  
-        Ranged_Abilities(final int id, final String name, final int coolDown, final AbiltiyType abiltiyType)
+        Ranged_Abilities(final int id, final String name, final int coolDown, final AbilityType abiltiyType)
         {
             this.id = id;
             this.name = name;
@@ -383,7 +383,7 @@ public class Actionbar
         }
  
         @Override
-        public AbiltiyType getAbilityType()
+        public AbilityType getAbilityType()
         {
             return this.abiltiyType;
         }
@@ -391,25 +391,25 @@ public class Actionbar
  
     public enum Magic_Abilities implements Ability
     {
-        WRACK(22, "Wrack", 20, AbiltiyType.BASIC),
-        ASPHYXIATE(118, "Asphyxiate", 5, AbiltiyType.THRESHOLD),
-        OMNIPOWER(198, "Omnipower", 30, AbiltiyType.ULTIMATE),
-        DRAGON_BREATH(102, "Dragon Breat", 10, AbiltiyType.BASIC),
-        IMPACT(54, "Impact", 15, AbiltiyType.BASIC),
-        COMBUST(86, "Combust", 10, AbiltiyType.BASIC),
-        SURGE(38, "Surge", 20, AbiltiyType.BASIC),
-        DETONATE(134, "Detonate", 30, AbiltiyType.THRESHOLD),
-        CHAIN(70, "Chain", 10, AbiltiyType.BASIC),
-        WILD_MAGIC(150, "Wild Magic", 20, AbiltiyType.THRESHOLD),
-        METAMORPHOSIS(166, "Metamorphosis", 60, AbiltiyType.ULTIMATE),
-        TSUNAMI(182, "Tsunami", 60, AbiltiyType.ULTIMATE);
+        WRACK(22, "Wrack", 20, AbilityType.BASIC),
+        ASPHYXIATE(118, "Asphyxiate", 5, AbilityType.THRESHOLD),
+        OMNIPOWER(198, "Omnipower", 30, AbilityType.ULTIMATE),
+        DRAGON_BREATH(102, "Dragon Breat", 10, AbilityType.BASIC),
+        IMPACT(54, "Impact", 15, AbilityType.BASIC),
+        COMBUST(86, "Combust", 10, AbilityType.BASIC),
+        SURGE(38, "Surge", 20, AbilityType.BASIC),
+        DETONATE(134, "Detonate", 30, AbilityType.THRESHOLD),
+        CHAIN(70, "Chain", 10, AbilityType.BASIC),
+        WILD_MAGIC(150, "Wild Magic", 20, AbilityType.THRESHOLD),
+        METAMORPHOSIS(166, "Metamorphosis", 60, AbilityType.ULTIMATE),
+        TSUNAMI(182, "Tsunami", 60, AbilityType.ULTIMATE);
  
         private int id;
         private String name;
         private int coolDown;
-        private AbiltiyType abiltiyType;
+        private AbilityType abiltiyType;
  
-        Magic_Abilities(final int id, final String name, final int coolDown, final AbiltiyType abiltiyType)
+        Magic_Abilities(final int id, final String name, final int coolDown, final AbilityType abiltiyType)
         {
             this.id = id;
             this.name = name;
@@ -436,7 +436,7 @@ public class Actionbar
         }
  
         @Override
-        public AbiltiyType getAbilityType()
+        public AbilityType getAbilityType()
         {
             return this.abiltiyType;
         }
@@ -444,25 +444,25 @@ public class Actionbar
  
     public enum Defence_Abilities implements Ability
     {
-        ANTICIPATION(19, "Anticipation", 25, AbiltiyType.BASIC),
-        BASH(99, "Bash", 15, AbiltiyType.BASIC),
-        REVENGE(147, "Revenge", 20, AbiltiyType.THRESHOLD),
-        PROVOKE(51, "Provoke", 10, AbiltiyType.BASIC),
-        IMMORTALITY(195, "Immortality", 120, AbiltiyType.ULTIMATE),
-        FREEDOM(35, "Freedom", 30, AbiltiyType.BASIC),
-        REFLECT(115, "Reflect", 15, AbiltiyType.THRESHOLD),
-        RESONANCE(67, "Resonance", 30, AbiltiyType.BASIC),
-        REJUVENATE(179, "Rejuvenate", 60, AbiltiyType.ULTIMATE),
-        DEBILITATE(131, "Debilitate", 30, AbiltiyType.THRESHOLD),
-        PREPARATION(83, "Preparation", 5, AbiltiyType.BASIC),
-        BARRICADE(163, "Barricade", 60, AbiltiyType.ULTIMATE);
+        ANTICIPATION(19, "Anticipation", 25, AbilityType.BASIC),
+        BASH(99, "Bash", 15, AbilityType.BASIC),
+        REVENGE(147, "Revenge", 20, AbilityType.THRESHOLD),
+        PROVOKE(51, "Provoke", 10, AbilityType.BASIC),
+        IMMORTALITY(195, "Immortality", 120, AbilityType.ULTIMATE),
+        FREEDOM(35, "Freedom", 30, AbilityType.BASIC),
+        REFLECT(115, "Reflect", 15, AbilityType.THRESHOLD),
+        RESONANCE(67, "Resonance", 30, AbilityType.BASIC),
+        REJUVENATE(179, "Rejuvenate", 60, AbilityType.ULTIMATE),
+        DEBILITATE(131, "Debilitate", 30, AbilityType.THRESHOLD),
+        PREPARATION(83, "Preparation", 5, AbilityType.BASIC),
+        BARRICADE(163, "Barricade", 60, AbilityType.ULTIMATE);
  
         private int id;
         private String name;
         private int coolDown;
-        private AbiltiyType abiltiyType;
+        private AbilityType abiltiyType;
  
-        Defence_Abilities(final int id, final String name, final int coolDown, final AbiltiyType abiltiyType)
+        Defence_Abilities(final int id, final String name, final int coolDown, final AbilityType abiltiyType)
         {
             this.id = id;
             this.name = name;
@@ -489,7 +489,7 @@ public class Actionbar
         }
  
         @Override
-        public AbiltiyType getAbilityType()
+        public AbilityType getAbilityType()
         {
             return this.abiltiyType;
         }
@@ -497,17 +497,17 @@ public class Actionbar
  
     public enum Constitution_Abilities implements Ability
     {
-        REGENERATE(20, "Regenerate", 0, AbiltiyType.BASIC),
-        MOMENTUM(116, "Momentum", 0, AbiltiyType.ULTIMATE),
-        INCITE(36, "Incite", 0, AbiltiyType.BASIC),
-        SINGLE_WAY_WILDERNESS(132, "Single-way Wilderness", 10, AbiltiyType.BASIC);
+        REGENERATE(20, "Regenerate", 0, AbilityType.BASIC),
+        MOMENTUM(116, "Momentum", 0, AbilityType.ULTIMATE),
+        INCITE(36, "Incite", 0, AbilityType.BASIC),
+        SINGLE_WAY_WILDERNESS(132, "Single-way Wilderness", 10, AbilityType.BASIC);
  
         private int id;
         private String name;
         private int coolDown;
-        private AbiltiyType abiltiyType;
+        private AbilityType abiltiyType;
  
-        Constitution_Abilities(final int id, final String name, final int coolDown, final AbiltiyType abiltiyType)
+        Constitution_Abilities(final int id, final String name, final int coolDown, final AbilityType abiltiyType)
         {
             this.id = id;
             this.name = name;
@@ -534,7 +534,7 @@ public class Actionbar
         }
  
         @Override
-        public AbiltiyType getAbilityType()
+        public AbilityType getAbilityType()
         {
             return this.abiltiyType;
         }

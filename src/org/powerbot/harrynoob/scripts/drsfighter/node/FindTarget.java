@@ -2,6 +2,8 @@ package org.powerbot.harrynoob.scripts.drsfighter.node;
 
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
+import org.powerbot.game.api.methods.Settings;
+import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
@@ -37,10 +39,12 @@ public class FindTarget extends Node {
 			{
 				Camera.turnTo(target);
 			}
+			Camera.turnTo(target);
 			if(target.interact("Attack", target.getName()))
 			{
 				DRSFighter.instance.setCurrentTarget(target.validate() ? target : null);
 			}
+			boolean b = Settings.get(463) == 0 && Widgets.get(750, 2) != null ? Widgets.get(750, 2).click(true) : false;
 		}
 	}
 

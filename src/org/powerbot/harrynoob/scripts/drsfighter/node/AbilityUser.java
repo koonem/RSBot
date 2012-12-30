@@ -12,18 +12,21 @@ public class AbilityUser extends Node {
 
 	@Override
 	public boolean activate() {
-		return Percentages.getHealthPercent(Players.getLocal().get()) > 70
-				&& Actionbar.getAdrenalinPercent() != 100
-				&& Players.getLocal().getInteracting() != null
+		return Players.getLocal().getInteracting() != null
 				&& DRSFighter.instance.getCurrentTarget() != null
-				&& DRSFighter.instance.getCurrentTarget().validate();
+				&& DRSFighter.instance.getCurrentTarget().validate()
+				&& !Players.getLocal().isMoving();
 	}
 
 	@Override
 	public void execute() {
 		for(int i = 0; i < 12; i++)
 		{
-			if(Actionbar.getSlot(i).isAvailable() && Actionbar.getAbilityAt(i) != null & Actionbar.getAbilityAt(i).getAbilityType() != Actionbar.AbiltiyType.ULTIMATE)
+			if(Actionbar.getSlot(i).isAvailable() 
+					&& Actionbar.getAbilityAt(i) != null 
+					&& Actionbar.getAbilityAt(i).getAbilityType() == Actionbar.AbilityType.BASIC
+					&& Actionbar.getSlotStateAt(i).equals(Actionbar.SlotState.ABILITY)
+					&& !Actionbar.getSlot(i).getCooldownWidget().isOnScreen())
 			{
 				Actionbar.getSlot(i).activate(true);
 				break;

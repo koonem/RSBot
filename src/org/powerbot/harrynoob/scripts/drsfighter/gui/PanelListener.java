@@ -3,7 +3,9 @@ package org.powerbot.harrynoob.scripts.drsfighter.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 
 import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
 
@@ -18,7 +20,7 @@ public class PanelListener implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e)
 	{
-		JCheckBox a = (JCheckBox)e.getSource();
+		JComponent a = e.getSource() instanceof JButton ? (JButton)e.getSource(): (JCheckBox)e.getSource();
 		if(a.getName().equals("weaponSwitchButton"))
 		{
 			panel.changeWeaponSwitch();
