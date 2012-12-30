@@ -14,7 +14,8 @@ tmp/
 *.bat
 *.jar
 local.properties
-Actionbar.java
+*Flasker.java
+BeerBuyer.java
 ScriptInjector.java
 .classpath
 .settings/
