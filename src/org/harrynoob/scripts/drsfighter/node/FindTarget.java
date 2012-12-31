@@ -13,16 +13,19 @@ import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.interactive.NPC;
+import org.powerbot.game.api.wrappers.interactive.Player;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 public class FindTarget extends Node {
 
 	@Override
 	public boolean activate() {
-		return  !Players.getLocal().isMoving()
+		return  (!Players.getLocal().isMoving()
 				&& (Players.getLocal().getInteracting() == null
 				&& (DRSFighter.instance.getCurrentTarget() == null 
-				|| !DRSFighter.instance.getCurrentTarget().validate()));
+				|| !DRSFighter.instance.getCurrentTarget().validate())))
+				|| (Variables.failsafeTimer != null
+				&& Variables.failsafeTimer.getRemaining() == 0);
 	}
 
 	@Override
@@ -30,14 +33,33 @@ public class FindTarget extends Node {
 		// TODO Auto-generated method stub
 		DRSFighter.instance.status = "Finding new target";
 		WidgetChild actionBarWidget = Widgets.get(640, 6);
+		Variables.failsafeTimer = null;
 		NPC target = NPCs.getNearest(new Filter<NPC>() {
 			public boolean accept(NPC npc)
 			{
 				return npc.getInteracting() == null
 						&& npc.getId() == Variables.SPIDER_ID
 						&& npc.isIdle()
-						&& npc.getLocation().distance(Variables.VARROCK_CENTRAL_TILE) < 7;
+						&& npc.getLocation().distance(Variables.VARROCK_CENTRAL_TILE) < 7
+						&& !targetHasOtherEnemies();
 			}
+			
+			private boolean targetHasOtherEnemies()
+			{
+				Player[] p = Players.getLoaded(new Filter<Player>()
+						{
+							public boolean accept(Player p)
+							{
+								return !p.equals(Players.getLocal())
+										&& p.getInteracting() != null
+										&& p.getInteracting().equals(DRSFighter.instance.getCurrentTarget());
+										
+							}
+
+						});
+				return p != null && p.length > 0;
+			}
+
 		});
 		if(target != null && target.validate())
 		{
@@ -64,5 +86,6 @@ public class FindTarget extends Node {
 			b = !b;
 		}
 	}
-
+	
+	
 }

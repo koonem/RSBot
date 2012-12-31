@@ -3,6 +3,7 @@ package org.harrynoob.scripts.drsfighter.misc;
 import org.harrynoob.scripts.drsfighter.gui.MainPanel;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.util.Filter;
+import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.Item;
 
@@ -26,6 +27,8 @@ public class Variables {
 	public static int shieldID;
 	public static String bankLocation;
 	public static String foodWithdrawal;
+	public static Timer rejuvTimer;
+	public static Timer failsafeTimer;
 		
 	public enum FightLocation
 	{

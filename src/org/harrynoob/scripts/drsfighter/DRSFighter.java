@@ -30,10 +30,10 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", version = 1.01, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!")
+@Manifest(name = "DRSFighter", version = 1.03, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener, MouseListener{
 	
-	private Node[] NODE_LIST = {new CharmLooter(), new TargetSwitcher(), new EquipWeapon(),  new FindTarget(), new FoodEater(),  new EquipShield(), new RejuvenateSwitcher(),  new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
+	private Node[] NODE_LIST = {new FailsafeTimer(), new CharmLooter(), new TargetSwitcher(), new EquipWeapon(),  new FindTarget(), new FoodEater(),  new EquipShield(), new RejuvenateSwitcher(),  new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
 	public static DRSFighter instance;
 	public MainPanel main;
 	public boolean activated;
@@ -82,29 +82,35 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	
 	@Override
 	public int loop() {
-	    if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
-	    	return 1000;       
-	    }
-
-	    if (client != Context.client()) {
-	        WidgetCache.purge();
-	        Context.get().getEventManager().addListener(this);
-	        client = Context.client();
-	    }
-	    else if(Players.getLocal() == null) return 0;
-	    else if(activated)
-		{
-			for(Node n : NODE_LIST)
-			{
-				if(n.activate())
-				{
-					n.execute();
-					Task.sleep(50);
-				}
+	    try {
+			if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
+				return 1000;       
 			}
-			
+
+			if (client != Context.client()) {
+			    WidgetCache.purge();
+			    Context.get().getEventManager().addListener(this);
+			    client = Context.client();
+			}
+			else if(Players.getLocal() == null) return 0;
+			else if(activated)
+			{
+				for(Node n : NODE_LIST)
+				{
+					if(n.activate())
+					{
+						System.out.println("Activating node: "+n.toString());
+						n.execute();
+						Task.sleep(50);
+					}
+				}
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return 0;
+		return 50;
 	}
 	
 	public void onStop()

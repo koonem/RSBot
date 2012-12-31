@@ -10,9 +10,9 @@ public class TargetSwitcher extends Node {
 
 	@Override
 	public boolean activate() {
-		return targetHasOtherEnemies()
-				&& DRSFighter.instance.getCurrentTarget() != null
-				&& DRSFighter.instance.getCurrentTarget().validate();
+		return DRSFighter.instance.getCurrentTarget() != null
+				&& DRSFighter.instance.getCurrentTarget().validate()
+				&& targetHasOtherEnemies();
 	}
 
 	@Override
@@ -26,9 +26,9 @@ public class TargetSwitcher extends Node {
 				{
 					public boolean accept(Player p)
 					{
-						return p.getInteracting() != null
-								&& p.getInteracting().equals(DRSFighter.instance.getCurrentTarget())
-								&& !p.equals(Players.getLocal());
+						return !p.get().equals(Players.getLocal().get())
+								&& p.getInteracting() != null
+								&& p.getInteracting().equals(DRSFighter.instance.getCurrentTarget());
 					}
 
 				});

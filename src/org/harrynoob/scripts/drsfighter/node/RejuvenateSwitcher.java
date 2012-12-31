@@ -11,6 +11,7 @@ import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.util.Timer;
 
 public class RejuvenateSwitcher extends Node {
 
@@ -30,6 +31,7 @@ public class RejuvenateSwitcher extends Node {
 		{
 			DRSFighter.instance.status = "Using Rejuvenate";
 			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(true);
+			Variables.rejuvTimer = new Timer(10500);
 			Task.sleep(400);
 		}
 	}
