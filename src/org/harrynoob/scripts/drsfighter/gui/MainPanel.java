@@ -1,9 +1,7 @@
-package org.powerbot.harrynoob.scripts.drsfighter.gui;
+package org.harrynoob.scripts.drsfighter.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Frame;
 import java.awt.GridLayout;
-import java.awt.Panel;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashSet;
@@ -19,10 +17,9 @@ import javax.swing.JTabbedPane;
 
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.wrappers.node.Item;
-import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
 
-import static org.powerbot.harrynoob.scripts.drsfighter.misc.Variables.bankLocations;
-import static org.powerbot.harrynoob.scripts.drsfighter.misc.Variables.food;
+import static org.harrynoob.scripts.drsfighter.misc.Variables.bankLocations;
+import static org.harrynoob.scripts.drsfighter.misc.Variables.food;
 
 public class MainPanel extends JFrame implements WindowListener {
 
@@ -42,7 +39,7 @@ public class MainPanel extends JFrame implements WindowListener {
 	//					- Offhand support
 	//Save button
 	// 
-	
+	static final long serialVersionUID = 0;
 	private JTabbedPane tabbedPane;
 
 	//weaponSetupPane:
@@ -70,15 +67,15 @@ public class MainPanel extends JFrame implements WindowListener {
 	private JComponent bankPane;
 	private JCheckBox bankCheckBox;
 	private JCheckBox foodCheckBox;
-	private JComboBox foodComboBox;
-	private JComboBox locationBox;
+	private JComboBox<String> foodComboBox;
+	private JComboBox<String> locationBox;
 	
 	//finishPane:
 	//		- Start button
 	// 		- Save button
 	private JComponent finishPane;
 	private JButton startButton;
-	private JButton saveButton;
+	//private JButton saveButton;
 	
 	private PanelListener panelListener;
 	private static JPanel mainPanel;

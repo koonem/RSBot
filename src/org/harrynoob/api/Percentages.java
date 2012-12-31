@@ -1,4 +1,4 @@
-package org.powerbot.harrynoob.api;
+package org.harrynoob.api;
 
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.CombatStatusData;

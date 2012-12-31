@@ -1,4 +1,4 @@
-package org.powerbot.harrynoob.api;
+package org.harrynoob.api;
 import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.input.Keyboard;

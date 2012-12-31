@@ -1,21 +1,20 @@
-package org.powerbot.harrynoob.scripts.drsfighter;
+package org.harrynoob.scripts.drsfighter;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import org.harrynoob.scripts.drsfighter.gui.MainPanel;
+import org.harrynoob.scripts.drsfighter.misc.Variables;
+import org.harrynoob.scripts.drsfighter.node.*;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
 import org.powerbot.core.script.job.Task;
@@ -30,11 +29,8 @@ import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
-import org.powerbot.harrynoob.scripts.drsfighter.gui.MainPanel;
-import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
-import org.powerbot.harrynoob.scripts.drsfighter.node.*;
 
-@Manifest(name = "DRSFighter", version = 1.0, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!")
+@Manifest(name = "DRSFighter", version = 1.01, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!")
 public class DRSFighter extends ActiveScript implements PaintListener, MouseListener{
 	
 	private Node[] NODE_LIST = {new CharmLooter(), new TargetSwitcher(), new EquipWeapon(),  new FindTarget(), new FoodEater(),  new EquipShield(), new RejuvenateSwitcher(),  new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
@@ -142,15 +138,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
     private final Font font1 = new Font("Felix Titling", 0, 19);
     private final Font font2 = new Font("Felix Titling", 0, 14);
     private final int y = 50;
-	
-    private Image getImage(String url) {
-        try {
-            return ImageIO.read(new URL(url));
-        } catch(IOException e) {
-            return null;
-        }
-    }
-    
+	    
     public int getExpGain() {
         if(startxp == 0) {
             startxp = Settings.get(91);

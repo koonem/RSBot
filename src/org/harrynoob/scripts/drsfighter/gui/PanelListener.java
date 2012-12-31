@@ -1,4 +1,4 @@
-package org.powerbot.harrynoob.scripts.drsfighter.gui;
+package org.harrynoob.scripts.drsfighter.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 
-import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
+import org.harrynoob.scripts.drsfighter.DRSFighter;
 
 public class PanelListener implements ActionListener {
 

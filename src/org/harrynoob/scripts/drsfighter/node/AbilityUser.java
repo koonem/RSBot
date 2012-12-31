@@ -1,11 +1,8 @@
-package org.powerbot.harrynoob.scripts.drsfighter.node;
+package org.harrynoob.scripts.drsfighter.node;
 
+import org.harrynoob.api.Actionbar;
+import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.harrynoob.api.Actionbar.*;
-import org.powerbot.harrynoob.api.Actionbar;
-import org.powerbot.harrynoob.api.Percentages;
-import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
-import org.powerbot.harrynoob.scripts.drsfighter.misc.*;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 

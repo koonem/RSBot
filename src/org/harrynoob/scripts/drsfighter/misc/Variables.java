@@ -1,11 +1,10 @@
-package org.powerbot.harrynoob.scripts.drsfighter.misc;
+package org.harrynoob.scripts.drsfighter.misc;
 
+import org.harrynoob.scripts.drsfighter.gui.MainPanel;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.Tile;
-import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.node.Item;
-import org.powerbot.harrynoob.scripts.drsfighter.gui.MainPanel;
 
 
 public class Variables {

@@ -1,24 +1,25 @@
-package org.powerbot.harrynoob.scripts.drsfighter.node;
+package org.harrynoob.scripts.drsfighter.node;
 
-import static org.powerbot.harrynoob.api.Actionbar.getSlotWithAbility;
-import static org.powerbot.harrynoob.api.Actionbar.isAbilityAvailable;
+import static org.harrynoob.api.Actionbar.getSlotWithAbility;
+import static org.harrynoob.api.Actionbar.isAbilityAvailable;
 
+import org.harrynoob.api.Actionbar;
+import org.harrynoob.api.Percentages;
+import org.harrynoob.api.Actionbar.Defence_Abilities;
+import org.harrynoob.scripts.drsfighter.DRSFighter;
+import org.harrynoob.scripts.drsfighter.misc.Variables;
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.harrynoob.api.Actionbar;
-import org.powerbot.harrynoob.api.Actionbar.Defence_Abilities;
-import org.powerbot.harrynoob.api.Percentages;
-import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
-import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
 
-public class RejuvenateUser extends Node {
+public class RejuvenateSwitcher extends Node {
 
 	@Override
 	public boolean activate() {
 		return Variables.rejuvenate 
 				&& getSlotWithAbility(Defence_Abilities.REJUVENATE) != null 
 				&& Actionbar.getAdrenalinPercent() == 100 
-				&& !Variables.switchWeapons
+				&& Variables.switchWeapons
 				&& Percentages.getHealthPercent(Players.getLocal().get()) < 70
 				&& !Players.getLocal().isMoving();
 	}
@@ -29,6 +30,7 @@ public class RejuvenateUser extends Node {
 		{
 			DRSFighter.instance.status = "Using Rejuvenate";
 			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(true);
+			Task.sleep(400);
 		}
 	}
 

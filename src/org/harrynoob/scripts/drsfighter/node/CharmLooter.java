@@ -1,5 +1,7 @@
-package org.powerbot.harrynoob.scripts.drsfighter.node;
+package org.harrynoob.scripts.drsfighter.node;
 
+import org.harrynoob.scripts.drsfighter.DRSFighter;
+import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
@@ -10,18 +12,16 @@ import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
-import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
-import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
 
 public class CharmLooter extends Node {
 
 	@Override
 	public boolean activate() {
 		return GroundItems.getNearest(Variables.CHARM_IDS) != null
+				&& !Players.getLocal().isMoving()
 				&& Players.getLocal().getInteracting() == null
-				|| (DRSFighter.instance.getCurrentTarget() == null
-				|| (DRSFighter.instance.getCurrentTarget() != null && !DRSFighter.instance.getCurrentTarget().validate()))
-				&& !Players.getLocal().isMoving();
+				&& (DRSFighter.instance.getCurrentTarget() == null
+				|| (DRSFighter.instance.getCurrentTarget() != null && !DRSFighter.instance.getCurrentTarget().validate()));
 				
 	}
 

@@ -1,10 +1,10 @@
-package org.powerbot.harrynoob.scripts.drsfighter.branch;
+package org.harrynoob.scripts.drsfighter.branch;
 
+import org.harrynoob.api.Percentages;
+import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Branch;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.harrynoob.api.Percentages;
-import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
 
 public class SwitchingRejuvenate extends Branch {
 

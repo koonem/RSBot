@@ -1,10 +1,10 @@
-package org.powerbot.harrynoob.scripts.drsfighter.node;
+package org.harrynoob.scripts.drsfighter.node;
 
+import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.wrappers.interactive.Player;
 import org.powerbot.game.api.util.Filter;
-import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
 
 public class TargetSwitcher extends Node {
 

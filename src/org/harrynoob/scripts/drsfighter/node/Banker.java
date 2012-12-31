@@ -1,4 +1,4 @@
-package org.powerbot.harrynoob.scripts.drsfighter.node;
+package org.harrynoob.scripts.drsfighter.node;
 
 import org.powerbot.core.script.job.state.Node;
 

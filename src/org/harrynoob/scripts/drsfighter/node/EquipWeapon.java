@@ -1,13 +1,13 @@
-package org.powerbot.harrynoob.scripts.drsfighter.node;
+package org.harrynoob.scripts.drsfighter.node;
 
+import org.harrynoob.api.Percentages;
+import org.harrynoob.scripts.drsfighter.DRSFighter;
+import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
-import org.powerbot.harrynoob.api.Percentages;
-import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
-import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
 
 public class EquipWeapon extends Node {
 
@@ -19,21 +19,16 @@ public class EquipWeapon extends Node {
 				&& Percentages.getHealthPercent(Players.getLocal().get()) > 90;
 	}
 
-	int tries = 0;
 	@Override
 	public void execute() {
 		DRSFighter.instance.status = "Switching to weapon";
-		if(Equipment.equip(Variables.weaponID) || tries >= 5)
-		{
-			Task.sleep(500);
+		if(Equipment.equip(Variables.weaponID))
+		{	
+			Task.sleep(1000);
+			if(Inventory.getCount(Variables.shieldID) == 0) execute();
 			return;
 		}
-		else
-		{
-			Task.sleep(500);
-			tries++;
-			execute();
-		}
+
 
 	}
 
