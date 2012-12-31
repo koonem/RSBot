@@ -8,6 +8,7 @@ import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.harrynoob.api.Actionbar;
 import org.powerbot.harrynoob.api.Actionbar.Defence_Abilities;
 import org.powerbot.harrynoob.api.Percentages;
+import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
 import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
 
 public class RejuvenateUser extends Node {
@@ -25,7 +26,10 @@ public class RejuvenateUser extends Node {
 	@Override
 	public void execute() {
 		if(isAbilityAvailable(getSlotWithAbility(Defence_Abilities.REJUVENATE).getIndex()))
+		{
+			DRSFighter.instance.status = "Using Rejuvenate";
 			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(true);
+		}
 	}
 
 }

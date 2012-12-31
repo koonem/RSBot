@@ -34,10 +34,10 @@ import org.powerbot.harrynoob.scripts.drsfighter.gui.MainPanel;
 import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.harrynoob.scripts.drsfighter.node.*;
 
-@Manifest(name = "DRSFighter v1", version = 1.0, authors = "harrynoob", description = "Kills deadly red spider. Supports weapon switching!")
+@Manifest(name = "DRSFighter", version = 1.0, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!")
 public class DRSFighter extends ActiveScript implements PaintListener, MouseListener{
 	
-	private Node[] NODE_LIST = {new TargetSwitcher(), new EquipWeapon(), new FindTarget(), new FoodEater(),  new EquipShield(), new RejuvenateSwitcher(),  new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
+	private Node[] NODE_LIST = {new CharmLooter(), new TargetSwitcher(), new EquipWeapon(),  new FindTarget(), new FoodEater(),  new EquipShield(), new RejuvenateSwitcher(),  new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
 	public static DRSFighter instance;
 	public MainPanel main;
 	public boolean activated;
@@ -68,6 +68,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 						main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						main.setSize(600, 600);
 						main.setLocationRelativeTo(null);
+						main.setTitle("DRSFighter");
 						main.pack();
 						main.setVisible(true);
 					} catch (Exception e) {
@@ -80,6 +81,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Mouse.setSpeed(Mouse.Speed.FAST);
 	}
 	
 	@Override

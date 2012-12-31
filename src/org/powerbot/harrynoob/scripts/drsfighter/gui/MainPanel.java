@@ -92,7 +92,7 @@ public class MainPanel extends JFrame implements WindowListener {
 		bankPane.setEnabled(false);
 		finishPane = finishTab();
 		tabbedPane.add("Basic", weaponSetupPane);
-		tabbedPane.add("Banking", bankPane);
+		//tabbedPane.add("Banking", bankPane);
 		tabbedPane.add("Finish", finishPane);
 		mainPanel.add(tabbedPane);
 		add(mainPanel);
@@ -109,7 +109,7 @@ public class MainPanel extends JFrame implements WindowListener {
     	weaponSwitchButton = new JCheckBox("Switch weapons", false);
     	weaponSwitchButton.setName("weaponSwitchButton");
     	weaponSwitchButton.addActionListener(panelListener);
-    	weaponLabel = new JLabel("2h weapon: ");
+    	weaponLabel = new JLabel("2h/offhand: ");
     	//Temp "", otherwise none
     	weaponBox = getInventoryNames() != null ? new JComboBox<String>(getInventoryNames()) : new JComboBox<String>(new String[] { "" });
     	weaponBox.setEnabled(false);

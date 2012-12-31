@@ -5,6 +5,7 @@ import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.harrynoob.api.Actionbar;
 import org.powerbot.harrynoob.api.Percentages;
 import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
 import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
@@ -16,7 +17,8 @@ public class EquipShield extends Node {
 		return Variables.switchWeapons
 				&& Inventory.getItem(Variables.shieldID) != null
 				/*&& Equipment.appearanceContainsOneOf(Variables.weaponID)*/
-				&& Percentages.getHealthPercent(Players.getLocal().get()) < 70;
+				&& Percentages.getHealthPercent(Players.getLocal().get()) < 70
+				&& Actionbar.getAdrenalinPercent() == 100;
 	}
 
 	int tries;

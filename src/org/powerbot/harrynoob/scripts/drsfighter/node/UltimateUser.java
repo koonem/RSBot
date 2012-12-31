@@ -39,6 +39,7 @@ public class UltimateUser extends Node {
 		{
 			if(Actionbar.getSlotWithAbility(a).isAvailable())
 			{
+				DRSFighter.instance.status = "Using ultimates";
 				Actionbar.getSlotWithAbility(a).activate(true);
 				break;
 			}

@@ -10,9 +10,9 @@ public class TargetSwitcher extends Node {
 
 	@Override
 	public boolean activate() {
-		return DRSFighter.instance.getCurrentTarget() != null
-				&& DRSFighter.instance.getCurrentTarget().validate()
-				&& targetHasOtherEnemies();
+		return targetHasOtherEnemies()
+				&& DRSFighter.instance.getCurrentTarget() != null
+				&& DRSFighter.instance.getCurrentTarget().validate();
 	}
 
 	@Override

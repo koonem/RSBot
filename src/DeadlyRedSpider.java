@@ -46,7 +46,7 @@ import org.powerbot.game.api.Manifest;
 //http://pastie.org/private/jsdkwmxcvds1kpxtvxra (v0.2)
 //http://pastie.org/private/6fki2nil6qjh6hblp53iaw (v0.3)
 
-@Manifest(authors={"harrynoob"}, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.51, topic=882944, website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(authors={"harrynoob"},hidden = true, description="Kills deadly red spiders efficiently", name="DRSFighter", version=0.51, topic=882944, website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DeadlyRedSpider extends ActiveScript implements PaintListener, MouseListener{
 
 	private static Filter<NPC> SPIDER_FILTER = new Filter<NPC>() {

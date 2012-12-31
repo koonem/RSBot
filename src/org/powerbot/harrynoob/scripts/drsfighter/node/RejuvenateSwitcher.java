@@ -10,6 +10,7 @@ import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.harrynoob.api.Actionbar;
 import org.powerbot.harrynoob.api.Actionbar.Defence_Abilities;
 import org.powerbot.harrynoob.api.Percentages;
+import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
 import org.powerbot.harrynoob.scripts.drsfighter.misc.Variables;
 
 public class RejuvenateSwitcher extends Node {
@@ -28,6 +29,7 @@ public class RejuvenateSwitcher extends Node {
 	public void execute() {
 		if(isAbilityAvailable(getSlotWithAbility(Defence_Abilities.REJUVENATE).getIndex()))
 		{
+			DRSFighter.instance.status = "Using Rejuvenate";
 			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(true);
 			Task.sleep(400);
 		}

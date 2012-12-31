@@ -6,6 +6,7 @@ import org.powerbot.harrynoob.api.Actionbar;
 import org.powerbot.harrynoob.api.Percentages;
 import org.powerbot.harrynoob.scripts.drsfighter.DRSFighter;
 import org.powerbot.harrynoob.scripts.drsfighter.misc.*;
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 
 public class AbilityUser extends Node {
@@ -28,7 +29,9 @@ public class AbilityUser extends Node {
 					&& Actionbar.getSlotStateAt(i).equals(Actionbar.SlotState.ABILITY)
 					&& !Actionbar.getSlot(i).getCooldownWidget().isOnScreen())
 			{
+				DRSFighter.instance.status = "Using basic abilities";
 				Actionbar.getSlot(i).activate(true);
+				Task.sleep(500);
 				break;
 			}
 		}

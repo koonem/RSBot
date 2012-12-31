@@ -16,7 +16,7 @@ public class EquipWeapon extends Node {
 		return Variables.switchWeapons
 				&& Inventory.getItem(Variables.weaponID) != null
 				/*&& Equipment.appearanceContainsOneOf(Variables.shieldID)*/
-				&& Percentages.getHealthPercent(Players.getLocal().get()) > 95;
+				&& Percentages.getHealthPercent(Players.getLocal().get()) > 90;
 	}
 
 	int tries = 0;

@@ -1,5 +1,6 @@
 package org.powerbot.harrynoob.scripts.drsfighter.node;
 
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.harrynoob.api.Actionbar;
@@ -39,10 +40,12 @@ public class ThresholdUser extends Node {
 		{
 			if(Actionbar.getSlotWithAbility(a).isAvailable())
 			{
+				DRSFighter.instance.status = "Using threshold";
 				Actionbar.getSlotWithAbility(a).activate(true);
 				break;
 			}
 		}
+		Task.sleep(300);
 	}
 	
 	private int getUltimateCount()
