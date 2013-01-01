@@ -1,6 +1,7 @@
 package org.harrynoob.scripts.drsfighter.node;
 
 import org.harrynoob.scripts.drsfighter.DRSFighter;
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.wrappers.interactive.Player;
@@ -18,6 +19,8 @@ public class TargetSwitcher extends Node {
 	@Override
 	public void execute() {
 		DRSFighter.instance.setCurrentTarget(null);
+		Task.sleep(500);
+		DRSFighter.instance.findNewTarget();
 	}
 	
 	private boolean targetHasOtherEnemies()

@@ -33,7 +33,6 @@ public class FindTarget extends Node {
 		// TODO Auto-generated method stub
 		DRSFighter.instance.status = "Finding new target";
 		WidgetChild actionBarWidget = Widgets.get(640, 6);
-		Variables.failsafeTimer = null;
 		NPC target = NPCs.getNearest(new Filter<NPC>() {
 			public boolean accept(NPC npc)
 			{
@@ -63,6 +62,7 @@ public class FindTarget extends Node {
 		});
 		if(target != null && target.validate())
 		{
+			Variables.failsafeTimer = null;
 			DRSFighter.instance.status = "Attacking new target";
 			if((actionBarWidget != null && actionBarWidget.contains(target.getCentralPoint()) || !Calculations.isOnScreen(target.getCentralPoint())))
 			{

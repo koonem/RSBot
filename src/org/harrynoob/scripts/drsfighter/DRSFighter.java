@@ -30,7 +30,7 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", version = 1.03, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(name = "DRSFighter", version = 1.05, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener, MouseListener{
 	
 	private Node[] NODE_LIST = {new FailsafeTimer(), new CharmLooter(), new TargetSwitcher(), new EquipWeapon(),  new FindTarget(), new FoodEater(),  new EquipShield(), new RejuvenateSwitcher(),  new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
@@ -214,4 +214,8 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	public void mouseReleased(MouseEvent arg0) {		
 	}
 
+	public void findNewTarget()
+	{
+		new FindTarget().execute();
+	}
 }

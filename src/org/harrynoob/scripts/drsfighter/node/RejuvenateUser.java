@@ -28,7 +28,7 @@ public class RejuvenateUser extends Node {
 		if(isAbilityAvailable(getSlotWithAbility(Defence_Abilities.REJUVENATE).getIndex()))
 		{
 			DRSFighter.instance.status = "Using Rejuvenate";
-			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(true);
+			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(false);
 		}
 	}
 

@@ -42,7 +42,7 @@ public class CharmLooter extends Node {
 			}
 
 			charm.interact("Take", charm.getGroundItem().getName());
-			Task.sleep(1000);
+			Task.sleep(1500);
 		}
 	}
 

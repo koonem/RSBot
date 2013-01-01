@@ -30,7 +30,7 @@ public class RejuvenateSwitcher extends Node {
 		if(isAbilityAvailable(getSlotWithAbility(Defence_Abilities.REJUVENATE).getIndex()))
 		{
 			DRSFighter.instance.status = "Using Rejuvenate";
-			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(true);
+			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(false);
 			Variables.rejuvTimer = new Timer(10500);
 			Task.sleep(400);
 		}

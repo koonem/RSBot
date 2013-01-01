@@ -28,6 +28,7 @@ public class EquipShield extends Node {
 		{
 			Task.sleep(1000);
 			if(Inventory.getCount(Variables.weaponID) == 0) execute();
+			Task.sleep(3000);
 			return;
 		}
 	}
