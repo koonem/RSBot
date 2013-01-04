@@ -17,6 +17,7 @@ local.properties
 *Flasker.java
 BeerBuyer.java
 ScriptInjector.java
+temp.java
 .classpath
 .settings/
 .loadpath
