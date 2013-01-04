@@ -22,6 +22,7 @@ public class Variables {
 	public static boolean switchWeapons;
 	public static boolean banking;
 	public static boolean withdrawFood;
+	public static boolean lootCharms;
 //	public static boolean requiresSwitch;
 	public static int weaponID;
 	public static int shieldID;
@@ -58,6 +59,7 @@ public class Variables {
 		switchWeapons = b[1];
 		banking = b[2];
 		withdrawFood = b[3];
+		lootCharms = b[4];
 		String[] s = mainPanel.stringOptions();
 		weaponID = getItemByName(s[0]) != null ? getItemByName(s[0]).getId() : 0;
 		shieldID = getItemByName(s[1]) != null ? getItemByName(s[1]).getId() : 0;

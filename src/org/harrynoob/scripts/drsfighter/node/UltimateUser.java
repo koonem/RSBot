@@ -17,7 +17,7 @@ public class UltimateUser extends Node {
 				&& Players.getLocal().getInteracting() != null
 				&& Players.getLocal().getInteracting().equals(DRSFighter.instance.getCurrentTarget())
 				&& Actionbar.getAdrenalinPercent() == 100
-				&& Percentages.getHealthPercent(DRSFighter.instance.getCurrentTarget().get()) > 50
+				&& Percentages.getHealthPercent(DRSFighter.instance.getCurrentTarget().get()) > 33
 				&& !Players.getLocal().isMoving();
 	}
 

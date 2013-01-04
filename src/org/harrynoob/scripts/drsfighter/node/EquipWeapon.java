@@ -1,9 +1,10 @@
 package org.harrynoob.scripts.drsfighter.node;
 
+import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
+import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Equipment;
@@ -24,10 +25,16 @@ public class EquipWeapon extends Node {
 	@Override
 	public void execute() {
 		DRSFighter.instance.status = "Switching to weapon";
-		if(Equipment.equip(Variables.weaponID))
-		{	
-			Task.sleep(1000);
-			if(Inventory.getCount(Variables.shieldID) == 0) execute();
+		Equipment.equip(Variables.weaponID);
+		if(Utilities.waitFor(new Condition()
+		{
+			public boolean validate()
+			{
+				return Equipment.containsOneOf(Variables.weaponID);
+			}
+		}, 3000))
+		{
+			System.out.println("Succesfully equipped weapon!");
 			return;
 		}
 	}

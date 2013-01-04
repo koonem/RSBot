@@ -18,9 +18,9 @@ public class TargetSwitcher extends Node {
 
 	@Override
 	public void execute() {
-		DRSFighter.instance.setCurrentTarget(null);
-		Task.sleep(500);
-		DRSFighter.instance.findNewTarget();
+			DRSFighter.instance.setCurrentTarget(null);
+			Task.sleep(500);
+			DRSFighter.instance.findNewTarget();
 	}
 	
 	private boolean targetHasOtherEnemies()
@@ -36,6 +36,5 @@ public class TargetSwitcher extends Node {
 
 				});
 		return p != null && p.length > 0;
-	}
-
+	}	
 }

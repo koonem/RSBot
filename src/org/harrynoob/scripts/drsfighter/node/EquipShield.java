@@ -1,10 +1,11 @@
 package org.harrynoob.scripts.drsfighter.node;
 
 import org.harrynoob.api.Actionbar;
+import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
+import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Equipment;
@@ -24,11 +25,16 @@ public class EquipShield extends Node {
 	@Override
 	public void execute() {
 		DRSFighter.instance.status = "Switching to shield";
-		if(Equipment.equip(Variables.shieldID))
+		Equipment.equip(Variables.shieldID);
+		if(Utilities.waitFor(new Condition()
 		{
-			Task.sleep(1000);
-			if(Inventory.getCount(Variables.weaponID) == 0) execute();
-			Task.sleep(3000);
+			public boolean validate()
+			{
+				return Equipment.containsOneOf(Variables.shieldID);
+			}
+		}, 4000))
+		{
+			System.out.println("Succesfully equipped shield!");
 			return;
 		}
 	}

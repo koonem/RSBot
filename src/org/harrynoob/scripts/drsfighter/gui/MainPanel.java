@@ -75,6 +75,7 @@ public class MainPanel extends JFrame implements WindowListener {
 	// 		- Save button
 	private JComponent finishPane;
 	private JButton startButton;
+	private JCheckBox looting;
 	//private JButton saveButton;
 	
 	private PanelListener panelListener;
@@ -153,7 +154,10 @@ public class MainPanel extends JFrame implements WindowListener {
     	startButton = new JButton("Start!");
     	startButton.addActionListener(panelListener);
     	startButton.setName("start");
+    	looting = new JCheckBox("Loot charms");
+    	looting.setSelected(true);
     	panel.add(startButton, BorderLayout.CENTER);
+    	panel.add(looting, BorderLayout.SOUTH);
     	return panel;
     }
     
@@ -244,11 +248,12 @@ public class MainPanel extends JFrame implements WindowListener {
 	
 	public boolean[] booleanOptions()
 	{
-		boolean[] b = new boolean[4];
+		boolean[] b = new boolean[5];
 		b[0] = rejuvenateBox.isSelected();
 		b[1] = weaponSwitchButton.isSelected() && b[0];
 		b[2] = bankCheckBox.isSelected();
 		b[3] = foodCheckBox.isSelected() && b[2];
+		b[4] = looting.isSelected();
 		return b;
 	}
     

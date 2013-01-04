@@ -17,7 +17,8 @@ public class CharmLooter extends Node {
 
 	@Override
 	public boolean activate() {
-		return GroundItems.getNearest(Variables.CHARM_IDS) != null
+		return Variables.lootCharms
+				&& GroundItems.getNearest(Variables.CHARM_IDS) != null
 				&& !Players.getLocal().isMoving()
 				&& Players.getLocal().getInteracting() == null
 				&& (DRSFighter.instance.getCurrentTarget() == null

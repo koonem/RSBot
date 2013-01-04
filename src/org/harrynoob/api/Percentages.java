@@ -1,6 +1,5 @@
 package org.harrynoob.api;
 
-import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.CombatStatusData;
 import org.powerbot.game.client.LinkedListNode;
 import org.powerbot.game.client.RSCharacter;
@@ -45,13 +44,13 @@ public class Percentages {
 
    public static int getAdrenalinePercent(final RSCharacter accessor) {
        final CombatStatusData adrenalineBar = getAdrenalineBar(accessor);
-       return adrenalineBar != null ? toPercent(adrenalineBar.getHPRatio() * Context.multipliers().CHARACTER_HPRATIO) : 0;
+       return adrenalineBar != null ? toPercent(adrenalineBar.getHPRatio()) : 0;
    }
 
 
    public static int getHealthPercent(final RSCharacter accessor) {
        final CombatStatusData healthBar = getHealthBar(accessor);
-       return healthBar != null ? toPercent(healthBar.getHPRatio() * Context.multipliers().CHARACTER_HPRATIO) : 100;
+       return healthBar != null ? toPercent(healthBar.getHPRatio()) : 100;
    }
 
    public static int toPercent(final int ratio) {

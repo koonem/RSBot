@@ -39,7 +39,7 @@ public class FindTarget extends Node {
 				return npc.getInteracting() == null
 						&& npc.getId() == Variables.SPIDER_ID
 						&& npc.isIdle()
-						&& npc.getLocation().distance(Variables.VARROCK_CENTRAL_TILE) < 7
+						&& npc.getLocation().distanceTo() < 10
 						&& !targetHasOtherEnemies();
 			}
 			
@@ -60,6 +60,10 @@ public class FindTarget extends Node {
 			}
 
 		});
+		if(spidersAttackUs())
+		{
+			target = getNewTarget();
+		}
 		if(target != null && target.validate())
 		{
 			Variables.failsafeTimer = null;
@@ -72,11 +76,37 @@ public class FindTarget extends Node {
 					Walking.walk(Variables.VARROCK_CENTRAL_TILE);
 				}
 			}
-			
+			if(!target.equals(NPCs.getNearest(new Filter<NPC>() {
+				public boolean accept(NPC npc)
+				{
+					return npc.getInteracting() == null
+							&& npc.getId() == Variables.SPIDER_ID
+							&& npc.isIdle()
+							&& npc.getLocation().distance(Variables.VARROCK_CENTRAL_TILE) < 7
+							&& !targetHasOtherEnemies();
+				}
+
+				private boolean targetHasOtherEnemies()
+				{
+					Player[] p = Players.getLoaded(new Filter<Player>()
+							{
+						public boolean accept(Player p)
+						{
+							return !p.equals(Players.getLocal())
+									&& p.getInteracting() != null
+									&& p.getInteracting().equals(DRSFighter.instance.getCurrentTarget());
+
+						}
+
+							});
+					return p != null && p.length > 0;
+				}
+
+			}))) return;
 			if(target.interact("Attack", target.getName()))
 			{
 				DRSFighter.instance.setCurrentTarget(target.validate() ? target : null);
-				Task.sleep(200);
+				Task.sleep(1000);
 			}
 			else
 			{
@@ -86,6 +116,49 @@ public class FindTarget extends Node {
 			b = !b;
 		}
 	}
+	
+	private boolean spidersAttackUs()
+	{
+		NPC[] npc = NPCs.getLoaded(new Filter<NPC>()
+				{
+					public boolean accept(NPC n)
+					{
+						return n.getInteracting() != null
+								&& n.getInteracting().equals(Players.getLocal());
+					}
+				});
+		return npc != null && npc.length > 0;
+	}
+	
+	private NPC getNewTarget()
+	{
+		return NPCs.getNearest(new Filter<NPC>(){
+			public boolean accept(NPC n)
+			{
+				return n.getInteracting() != null
+						&& n.getInteracting().equals(Players.getLocal())
+						&& !targetHasOtherEnemies(n);
+			}
+		});
+	}
+	
+	private boolean targetHasOtherEnemies(final NPC n)
+	{
+		Player[] p = Players.getLoaded(new Filter<Player>()
+				{
+					public boolean accept(Player p)
+					{
+						return !p.equals(Players.getLocal())
+								&& p.getInteracting() != null
+								&& p.getInteracting().equals(n);
+								
+					}
+
+				});
+		return p != null && p.length > 0;
+	}
+
+
 	
 	
 }

@@ -21,19 +21,19 @@ import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
-import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.tab.Skills;
 import org.powerbot.game.api.methods.widget.WidgetCache;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", version = 1.05, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(name = "DRSFighter", version = 1.077, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener, MouseListener{
 	
-	private Node[] NODE_LIST = {new FailsafeTimer(), new CharmLooter(), new TargetSwitcher(), new EquipWeapon(),  new FindTarget(), new FoodEater(),  new EquipShield(), new RejuvenateSwitcher(),  new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
+	private Node[] NODE_LIST = {new FailsafeTimer(), new RejuvenateSwitcher(), new EquipWeapon(), new CharmLooter(), new TargetSwitcher(),  new FindTarget2(), new FoodEater(),  new EquipShield(),   new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
 	public static DRSFighter instance;
 	public MainPanel main;
 	public boolean activated;
@@ -64,7 +64,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 						main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						main.setSize(600, 600);
 						main.setLocationRelativeTo(null);
-						main.setTitle("DRSFighter");
+						main.setTitle("DRSFighter v1.077");
 						main.pack();
 						main.setVisible(true);
 					} catch (Exception e) {
@@ -101,10 +101,10 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 					{
 						System.out.println("Activating node: "+n.toString());
 						n.execute();
-						Task.sleep(50);
+						Task.sleep(100);
+						break;
 					}
 				}
-				
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -124,7 +124,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 		Variables.initOptions(main);
 		timer = new Timer(0);
 		startTime = System.currentTimeMillis();
-		startxp = 0;
+		startxp = getCombatXp();
 	}
 
 	public NPC getCurrentTarget() {
@@ -133,6 +133,13 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 
 	public void setCurrentTarget(NPC currentTarget) {
 		this.currentTarget = currentTarget;
+	}
+	
+	public int getCombatXp()
+	{
+		return Skills.getExperience(Skills.ATTACK) + Skills.getExperience(Skills.DEFENSE)
+				+ Skills.getExperience(Skills.STRENGTH) + Skills.getExperience(Skills.RANGE)
+				+ Skills.getExperience(Skills.MAGIC) + Skills.getExperience(Skills.CONSTITUTION);
 	}
 	
     private final Color color1 = new Color(0, 0, 0);
@@ -147,10 +154,10 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	    
     public int getExpGain() {
         if(startxp == 0) {
-            startxp = Settings.get(91);
+            getCombatXp();
         }
-        int curr = Settings.get(91);
-        return (curr - startxp) / 10;
+        int curr = getCombatXp();
+        return (curr - startxp);
     }
     
     public void onRepaint(Graphics g1) {

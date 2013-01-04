@@ -10,9 +10,8 @@ public class FailsafeTimer extends Node {
 
 	@Override
 	public boolean activate() {
-		return ((DRSFighter.instance.getCurrentTarget() == null
-				|| (DRSFighter.instance.getCurrentTarget() != null
-				&& !DRSFighter.instance.getCurrentTarget().validate())) 
+		return ((DRSFighter.instance.getCurrentTarget() != null
+				&& !DRSFighter.instance.getCurrentTarget().validate()) 
 				|| Players.getLocal().getInteracting() == null)
 				&& Variables.failsafeTimer == null
 				&& !Players.getLocal().isMoving();

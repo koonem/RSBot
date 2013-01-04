@@ -4,13 +4,16 @@ import static org.harrynoob.api.Actionbar.getSlotWithAbility;
 import static org.harrynoob.api.Actionbar.isAbilityAvailable;
 
 import org.harrynoob.api.Actionbar;
+import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
+import org.harrynoob.api.Utilities;
 import org.harrynoob.api.Actionbar.Defence_Abilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.util.Timer;
 
 public class RejuvenateSwitcher extends Node {
@@ -22,7 +25,8 @@ public class RejuvenateSwitcher extends Node {
 				&& Actionbar.getAdrenalinPercent() == 100 
 				&& Variables.switchWeapons
 				&& Percentages.getHealthPercent(Players.getLocal().get()) < 70
-				&& !Players.getLocal().isMoving();
+				&& !Players.getLocal().isMoving()
+				&& Equipment.appearanceContainsAll(Variables.shieldID);
 	}
 
 	@Override
@@ -30,7 +34,12 @@ public class RejuvenateSwitcher extends Node {
 		if(isAbilityAvailable(getSlotWithAbility(Defence_Abilities.REJUVENATE).getIndex()))
 		{
 			DRSFighter.instance.status = "Using Rejuvenate";
-			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(false);
+			if(Utilities.waitFor(new Condition(){
+				public boolean validate()
+				{
+					return getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(false);
+				}
+			}, 6000))
 			Variables.rejuvTimer = new Timer(10500);
 			Task.sleep(400);
 		}
