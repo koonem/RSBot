@@ -78,6 +78,11 @@ public class MainPanel extends JFrame implements WindowListener {
 	private JCheckBox looting;
 	//private JButton saveButton;
 	
+	private JComponent donatePane;
+	//private Image donateImage;
+	private JLabel imageLabel;
+	private JLabel donateLabel;
+	
 	private PanelListener panelListener;
 	private static JPanel mainPanel;
 	public MainPanel()
@@ -89,9 +94,11 @@ public class MainPanel extends JFrame implements WindowListener {
 		bankPane = bankPane();
 		bankPane.setEnabled(false);
 		finishPane = finishTab();
+		donatePane = donateTab();
 		tabbedPane.add("Basic", weaponSetupPane);
 		//tabbedPane.add("Banking", bankPane);
 		tabbedPane.add("Finish", finishPane);
+		tabbedPane.add("Donate", donatePane);
 		mainPanel.add(tabbedPane);
 		add(mainPanel);
 		//tabbedPane.add(finishPane);
@@ -161,6 +168,17 @@ public class MainPanel extends JFrame implements WindowListener {
     	return panel;
     }
     
+    private JComponent donateTab()
+    {
+    	JPanel panel = new JPanel(new BorderLayout());
+    	imageLabel = new JLabel("Link is in forum thread", JLabel.CENTER);
+    	//imageLabel.addActionListener(panelListener);
+    	donateLabel = new JLabel("Donate €1!", JLabel.CENTER);
+    	panel.add(imageLabel, BorderLayout.CENTER);
+    	panel.add(donateLabel, BorderLayout.NORTH);
+    	return panel;
+    }
+    
     private String[] getInventoryNames()
     {
     	HashSet<String> s = new HashSet<String>();
@@ -217,6 +235,21 @@ public class MainPanel extends JFrame implements WindowListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+/*	private Image getImage(String url)
+	{
+		try
+		{
+			URL u = new URL("https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif");
+			Image a = ImageIO.read(u);
+			return a;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}		
+	}*/
 
 	@Override
 	public void windowDeiconified(WindowEvent arg0) {

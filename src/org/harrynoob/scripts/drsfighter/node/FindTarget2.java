@@ -63,13 +63,13 @@ public class FindTarget2 extends Node {
 					return newTarget.interact("Attack", newTarget.getName())
 							|| Players.getLocal().isMoving();
 				}
-			}, 5000))
+			}, 3000))
 			{
 				DRSFighter.instance.setCurrentTarget(newTarget);
 			}
 			else
 			{
-				Walking.walk(Variables.VARROCK_CENTRAL_TILE);
+				Camera.turnTo(newTarget);
 			}
 		}
 		else

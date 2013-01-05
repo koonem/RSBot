@@ -1,6 +1,5 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-import org.harrynoob.api.Percentages;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
@@ -11,7 +10,7 @@ public class FoodEater extends Node {
 
 	@Override
 	public boolean activate() {
-		return Percentages.getHealthPercent(Players.getLocal().get()) < 50
+		return Players.getLocal().getHealthPercent() < 50
 				&& Inventory.getCount(Variables.FOOD_IDS) > 0;
 	}
 

@@ -19,6 +19,14 @@ public class Utilities {
 	public static boolean isOnScreen(Entity e)
 	{
 		WidgetChild actionbar = Widgets.get(640, 6);
+		if(actionbar != null && !actionbar.visible())
+		{
+			WidgetChild abToggle = Widgets.get(640, 28);
+			if(abToggle != null)
+			{
+				abToggle.interact("Expand");
+			}
+		}
 		return e.isOnScreen() && (actionbar == null || !(actionbar != null && actionbar.getBoundingRectangle().contains(e.getCentralPoint())));
 	}
 	

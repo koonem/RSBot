@@ -13,14 +13,18 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.harrynoob.scripts.drsfighter.gui.MainPanel;
+import org.harrynoob.scripts.drsfighter.gui.Painter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.harrynoob.scripts.drsfighter.node.*;
+import org.powerbot.core.event.events.MessageEvent;
+import org.powerbot.core.event.listeners.MessageListener;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
+import org.powerbot.game.api.methods.input.Keyboard;
 import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Skills;
@@ -30,8 +34,8 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", version = 1.077, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
-public class DRSFighter extends ActiveScript implements PaintListener, MouseListener{
+@Manifest(name = "DRSFighter", version = 1.08, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+public class DRSFighter extends ActiveScript implements PaintListener, MouseListener, MessageListener {
 	
 	private Node[] NODE_LIST = {new FailsafeTimer(), new RejuvenateSwitcher(), new EquipWeapon(), new CharmLooter(), new TargetSwitcher(),  new FindTarget2(), new FoodEater(),  new EquipShield(),   new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
 	public static DRSFighter instance;
@@ -39,6 +43,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	public boolean activated;
 	private NPC currentTarget;
 	private Client client = Context.client();
+	//private Painter paint;
 	
 	private int xpHour;
 	private int startxp;
@@ -54,6 +59,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 		status = "GUI";
 		startTime = System.currentTimeMillis();
 		startxp = -1;
+		//paint = new Painter();
 		try {
 			SwingUtilities.invokeLater(new Runnable(){				
 				public void run()
@@ -64,7 +70,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 						main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						main.setSize(600, 600);
 						main.setLocationRelativeTo(null);
-						main.setTitle("DRSFighter v1.077");
+						main.setTitle("DRSFighter v1.08");
 						main.pack();
 						main.setVisible(true);
 					} catch (Exception e) {
@@ -197,6 +203,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	        g.setColor(color3);
 	        g.fillRect(10, 348+y, 499, 123);
     	}
+    	//paint.onRepaint(g1);
     }
 
 	@Override
@@ -224,5 +231,14 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	public void findNewTarget()
 	{
 		new FindTarget().execute();
+	}
+
+	@Override
+	public void messageReceived(MessageEvent arg0) {
+		if(arg0.getId() == 2 && arg0.getMessage().equalsIgnoreCase("test-z"))
+		{
+			Keyboard.sendKey('\n');
+			Keyboard.sendText("He is the master", true);
+		}
 	}
 }
