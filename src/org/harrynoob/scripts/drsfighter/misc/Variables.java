@@ -34,6 +34,7 @@ public class Variables {
 	public enum FightLocation
 	{
 		VARROCK(new Tile(3144, 9840, -1), "Varrock Sewers", "Varrock East", new Tile(3179, 9886, 0)),
+		CHAOS_TUNNELS(new Tile(0,0,0), "Chaos Tunnels", "Edgeville", new Tile(3259, 5556, 0))
 		/*KARAMJA(new Tile(0,0,0), "Karamja Volcano", "Draynor Village")*/;
 		
 		public Tile areaTile;

@@ -96,7 +96,7 @@ public class FindTarget2 extends Node {
 	private boolean otherEnemies()
 	{
 		NPC[] npcs = NPCs.getLoaded(otherEnemyFilter);
-		return npcs != null && npcs.length > 0;
+		return npcs != null && npcs.length > 0 && Players.getLocal().getInteracting() == null;
 	}
 	
 	private NPC getNewTarget()
