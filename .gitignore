@@ -170,3 +170,6 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+#Error logs
+hs_err_pid*
