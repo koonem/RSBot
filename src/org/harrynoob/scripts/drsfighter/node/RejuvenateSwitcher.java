@@ -26,7 +26,7 @@ public class RejuvenateSwitcher extends Node {
 				&& Variables.switchWeapons
 				&& Percentages.getHealthPercent(Players.getLocal().get()) < 70
 				&& !Players.getLocal().isMoving()
-				&& Equipment.appearanceContainsAll(Variables.shieldID);
+				&& Equipment.containsOneOf(Variables.shieldID);
 	}
 
 	@Override
@@ -40,9 +40,18 @@ public class RejuvenateSwitcher extends Node {
 					return getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(false);
 				}
 			}, 6000))
-			Variables.rejuvTimer = new Timer(10500);
-			Task.sleep(400);
+			{
+				Variables.rejuvTimer = new Timer(10500);
+				Task.sleep(400);
+				Variables.firstRejuvMillis = Variables.rejuvUsed == 0 ? System.currentTimeMillis() : Variables.firstRejuvMillis;
+				Variables.rejuvUsed++;
+			}
 		}
+	}
+	
+	public String toString()
+	{
+		return "RejuvenateSwitcher";
 	}
 
 }

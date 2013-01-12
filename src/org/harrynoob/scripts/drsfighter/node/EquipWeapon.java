@@ -24,6 +24,7 @@ public class EquipWeapon extends Node {
 
 	@Override
 	public void execute() {
+		Utilities.ensureInventoryTab();
 		DRSFighter.instance.status = "Switching to weapon";
 		Equipment.equip(Variables.weaponID);
 		if(Utilities.waitFor(new Condition()
@@ -37,5 +38,11 @@ public class EquipWeapon extends Node {
 			System.out.println("Succesfully equipped weapon!");
 			return;
 		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "EquipWeapon";
 	}
 }

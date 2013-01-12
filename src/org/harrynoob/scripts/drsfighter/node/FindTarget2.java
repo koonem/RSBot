@@ -128,4 +128,9 @@ public class FindTarget2 extends Node {
 	{
 		return attacksOtherThanTarget() || otherEnemies();
 	}
+	
+	public String toString()
+	{
+		return "FindTarget";
+	}
 }

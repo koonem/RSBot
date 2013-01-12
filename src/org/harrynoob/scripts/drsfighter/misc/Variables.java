@@ -33,6 +33,9 @@ public class Variables {
 	public static String foodWithdrawal;
 	public static Timer rejuvTimer;
 	public static Timer failsafeTimer;
+	public static Timer lastRejuvTimer;
+	public static long firstRejuvMillis;
+	public static int rejuvUsed = 0;
 		
 	public enum FightLocation
 	{

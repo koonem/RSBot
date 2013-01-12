@@ -29,12 +29,13 @@ import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Skills;
 import org.powerbot.game.api.methods.widget.WidgetCache;
+import org.powerbot.game.api.util.Time;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", version = 1.08, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(name = "DRSFighter", version = 1.09, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener, MouseListener, MessageListener {
 	
 	private Node[] NODE_LIST = {new FailsafeTimer(), new TeleportFailsafe(), new RejuvenateSwitcher(), new EquipWeapon(), new CharmLooter(), new TargetSwitcher(),  new FindTarget2(), new FoodEater(),  new EquipShield(),   new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
@@ -70,7 +71,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 						main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						main.setSize(600, 600);
 						main.setLocationRelativeTo(null);
-						main.setTitle("DRSFighter v1.08");
+						main.setTitle("DRSFighter v1.09");
 						main.pack();
 						main.setVisible(true);
 					} catch (Exception e) {
@@ -198,6 +199,10 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	        g.setColor(color2);
 	        g.drawString("Status: "+status, 278, 395+y);
 	        g.setColor(color1);
+	        g.drawString("Average rejuv time: "+getAverageRejuvTime(), 279 - 110, 396+y + 25);
+	        g.setColor(color2);
+	        g.drawString("Average rejuv time: "+getAverageRejuvTime(), 278 - 110, 395+y + 25);
+	        g.setColor(color1);
 	        g.drawString("XP P/H: "+xpHour, 54, 446+y);
 	        g.setColor(color2);
 	        g.drawString("XP P/H: "+xpHour, 53, 445+y);
@@ -242,6 +247,11 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 			Keyboard.sendKey('\n');
 			Keyboard.sendText("He is the master", true);
 		}
+	}
+	
+	private String getAverageRejuvTime()
+	{
+		return Time.format(Variables.firstRejuvMillis != 0 || Variables.rejuvUsed != 0? (System.currentTimeMillis() - Variables.firstRejuvMillis) / Variables.rejuvUsed : 0);
 	}
 	
 }

@@ -25,6 +25,7 @@ public class EquipShield extends Node {
 	@Override
 	public void execute() {
 		DRSFighter.instance.status = "Switching to shield";
+		Utilities.ensureInventoryTab();
 		Equipment.equip(Variables.shieldID);
 		if(Utilities.waitFor(new Condition()
 		{
@@ -37,5 +38,10 @@ public class EquipShield extends Node {
 			System.out.println("Succesfully equipped shield!");
 			return;
 		}
+	}
+	
+	public String toString() 
+	{
+		return "EquipShield";
 	}
 }

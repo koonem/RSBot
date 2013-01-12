@@ -48,6 +48,11 @@ public class AbilityUser extends Node {
             Keyboard.sendKey('\u001B');
         }
     }
+    
+    public String toString()
+    {
+    	return "AbilityUser";
+    }
 
 
 }

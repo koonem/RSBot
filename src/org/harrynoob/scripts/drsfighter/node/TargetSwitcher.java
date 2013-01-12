@@ -36,5 +36,10 @@ public class TargetSwitcher extends Node {
 
 				});
 		return p != null && p.length > 0;
-	}	
+	}
+	
+	public String toString()
+	{
+		return "TargetSwitcher";
+	}
 }

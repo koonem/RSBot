@@ -47,4 +47,8 @@ public class CharmLooter extends Node {
 		}
 	}
 
+	public String toString()
+	{
+		return "CharmLooter";
+	}
 }

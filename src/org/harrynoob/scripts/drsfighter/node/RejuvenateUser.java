@@ -29,7 +29,15 @@ public class RejuvenateUser extends Node {
 		{
 			DRSFighter.instance.status = "Using Rejuvenate";
 			getSlotWithAbility(Defence_Abilities.REJUVENATE).activate(false);
+			Variables.firstRejuvMillis = Variables.rejuvUsed == 0 ? System.currentTimeMillis() : Variables.firstRejuvMillis;
+			Variables.rejuvUsed++;
+			
 		}
+	}
+	
+	public String toString()
+	{
+		return "RejuvenateUser";
 	}
 
 }

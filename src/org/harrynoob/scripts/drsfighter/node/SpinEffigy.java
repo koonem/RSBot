@@ -1,14 +1,13 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-import org.g;
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
-import org.powerbot.game.api.methods.Environment;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
+import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.node.GroundItem;
@@ -26,23 +25,25 @@ public class SpinEffigy extends Node {
 
 	@Override
 	public void execute() {
-		for(final GroundItem d : getSpinEffigies())
+		Utilities.ensureInventoryTab();
+		for(GroundItem d : getSpinEffigies())
 		{
+			d.validate();
 			final GroundItem g = GroundItems.getNearest(new int[] {Variables.EFFIGY_ID, Variables.SPIN_TICKET_ID});
 			if(!Utilities.isOnScreen(g))
 				Camera.turnTo(g);
+			final int i = Inventory.getCount(new int[] {Variables.EFFIGY_ID, Variables.SPIN_TICKET_ID});
 			g.interact("Take");
 			if(Utilities.waitFor(new Condition(){
 
 				@Override
 				public boolean validate() {
-					return !g.validate();
+					return !g.validate() || Inventory.getCount(new int[] {Variables.EFFIGY_ID, Variables.SPIN_TICKET_ID}) > i;
 				}
 				
 			}, 5000))
 			{
-				Environment.enableRandom(, false)
-				
+				if(Inventory.getCount(Variables.SPIN_TICKET_ID) > 0) Inventory.getItem(Variables.SPIN_TICKET_ID).getWidgetChild().interact("Claim spin");
 			}
 		}
 	}
@@ -59,6 +60,11 @@ public class SpinEffigy extends Node {
 					}
 				});
 		return g;
+	}
+	
+	public String toString()
+	{
+		return "SpinEffigy";
 	}
 
 }

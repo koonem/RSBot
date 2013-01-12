@@ -1,6 +1,7 @@
 package org.harrynoob.api;
 
 import org.powerbot.core.script.job.Task;
+import org.powerbot.game.api.methods.Tabs;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Entity;
@@ -28,6 +29,11 @@ public class Utilities {
 			}
 		}
 		return e.isOnScreen() && (actionbar == null || !(actionbar != null && actionbar.getBoundingRectangle().contains(e.getCentralPoint())));
+	}
+	
+	public static void ensureInventoryTab()
+	{
+		if(!Tabs.INVENTORY.isOpen()) Tabs.INVENTORY.open();
 	}
 	
 }
