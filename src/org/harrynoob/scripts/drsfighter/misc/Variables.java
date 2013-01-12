@@ -16,7 +16,10 @@ public class Variables {
 	public static final int SPIDER_ID = 63;
 	public static final int REJUVENATE_ANIMATION_ID = 18082;
 	public static final int[] CHARM_IDS = {12158, 12159, 12160, 12163};
+	public static final int SPIN_TICKET_ID = 24154;
+	public static final int EFFIGY_ID = 18778;
 	public static final Tile VARROCK_CENTRAL_TILE = new Tile(3179, 9885, 0).randomize(1, 1);
+	
 	
 	public static boolean rejuvenate;
 	public static boolean switchWeapons;

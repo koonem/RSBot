@@ -18,7 +18,8 @@ public class FindTarget2 extends Node {
 			{
 				public boolean accept(NPC n)
 					{
-						return n.getInteracting() != null
+						return n.getId() > 0
+								&& n.getInteracting() != null
 								&& n.getInteracting().equals(Players.getLocal());
 					}
 			};

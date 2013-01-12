@@ -10,10 +10,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.harrynoob.scripts.drsfighter.gui.MainPanel;
-import org.harrynoob.scripts.drsfighter.gui.Painter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.harrynoob.scripts.drsfighter.node.*;
 import org.powerbot.core.event.events.MessageEvent;
@@ -37,7 +37,7 @@ import org.powerbot.game.client.Client;
 @Manifest(name = "DRSFighter", version = 1.08, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener, MouseListener, MessageListener {
 	
-	private Node[] NODE_LIST = {new FailsafeTimer(), new RejuvenateSwitcher(), new EquipWeapon(), new CharmLooter(), new TargetSwitcher(),  new FindTarget2(), new FoodEater(),  new EquipShield(),   new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
+	private Node[] NODE_LIST = {new FailsafeTimer(), new TeleportFailsafe(), new RejuvenateSwitcher(), new EquipWeapon(), new CharmLooter(), new TargetSwitcher(),  new FindTarget2(), new FoodEater(),  new EquipShield(),   new RejuvenateUser(), new UltimateUser(), new ThresholdUser(), new AbilityUser()};
 	public static DRSFighter instance;
 	public MainPanel main;
 	public boolean activated;
@@ -122,6 +122,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	public void onStop()
 	{
 		if(main != null) main.setVisible(false);
+		JOptionPane.showMessageDialog(null, "<html>Thanks for using the script! Please consider donating! (link can be found in forum thread)</html>", "Thank you", JOptionPane.PLAIN_MESSAGE);
 	}
 	
 	public void activate()
@@ -203,6 +204,7 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 	        g.setColor(color3);
 	        g.fillRect(10, 348+y, 499, 123);
     	}
+        
     	//paint.onRepaint(g1);
     }
 
@@ -241,4 +243,5 @@ public class DRSFighter extends ActiveScript implements PaintListener, MouseList
 			Keyboard.sendText("He is the master", true);
 		}
 	}
+	
 }

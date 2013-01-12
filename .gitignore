@@ -21,6 +21,9 @@ temp.java
 .classpath
 .settings/
 .loadpath
+*.xml
+.name
+*.iml
 
 # External tool builders
 .externalToolBuilders/
