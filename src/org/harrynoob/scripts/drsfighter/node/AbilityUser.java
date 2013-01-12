@@ -1,5 +1,6 @@
 package org.harrynoob.scripts.drsfighter.node;
 
+
 import org.harrynoob.api.Actionbar;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
@@ -47,11 +48,6 @@ public class AbilityUser extends Node {
             Task.sleep(400);
             Keyboard.sendKey('\u001B');
         }
-    }
-    
-    public String toString()
-    {
-    	return "AbilityUser";
     }
 
 

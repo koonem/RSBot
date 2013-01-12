@@ -1,7 +1,8 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-import org.harrynoob.api.Utilities;
+
 import org.harrynoob.api.Condition;
+import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
@@ -127,10 +128,5 @@ public class FindTarget2 extends Node {
 	private boolean hasPossibleTargets()
 	{
 		return attacksOtherThanTarget() || otherEnemies();
-	}
-	
-	public String toString()
-	{
-		return "FindTarget";
 	}
 }

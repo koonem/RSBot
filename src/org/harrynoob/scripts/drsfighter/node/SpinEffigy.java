@@ -1,5 +1,6 @@
 package org.harrynoob.scripts.drsfighter.node;
 
+
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
@@ -60,11 +61,6 @@ public class SpinEffigy extends Node {
 					}
 				});
 		return g;
-	}
-	
-	public String toString()
-	{
-		return "SpinEffigy";
 	}
 
 }

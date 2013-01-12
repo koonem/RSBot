@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import javax.swing.JTabbedPane;
 import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import java.awt.Insets;
@@ -93,7 +92,7 @@ public class NewGUI {
 		gbc_lblhOffhand.gridy = 2;
 		panel.add(lblhOffhand, gbc_lblhOffhand);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -119,7 +118,7 @@ public class NewGUI {
 		gbc_lblShield.gridy = 4;
 		panel.add(lblShield, gbc_lblShield);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		JComboBox<String> comboBox_1 = new JComboBox<String>();
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;

@@ -3,6 +3,7 @@ package org.harrynoob.scripts.drsfighter.node;
 import static org.harrynoob.api.Actionbar.getSlotWithAbility;
 import static org.harrynoob.api.Actionbar.isAbilityAvailable;
 
+
 import org.harrynoob.api.Actionbar;
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
@@ -47,11 +48,6 @@ public class RejuvenateSwitcher extends Node {
 				Variables.rejuvUsed++;
 			}
 		}
-	}
-	
-	public String toString()
-	{
-		return "RejuvenateSwitcher";
 	}
 
 }

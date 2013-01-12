@@ -3,6 +3,7 @@ package org.harrynoob.scripts.drsfighter.node;
 import static org.harrynoob.api.Actionbar.getSlotWithAbility;
 import static org.harrynoob.api.Actionbar.isAbilityAvailable;
 
+
 import org.harrynoob.api.Actionbar;
 import org.harrynoob.api.Percentages;
 import org.harrynoob.api.Actionbar.Defence_Abilities;
@@ -33,11 +34,6 @@ public class RejuvenateUser extends Node {
 			Variables.rejuvUsed++;
 			
 		}
-	}
-	
-	public String toString()
-	{
-		return "RejuvenateUser";
 	}
 
 }

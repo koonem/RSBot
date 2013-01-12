@@ -1,5 +1,6 @@
 package org.harrynoob.scripts.drsfighter.node;
 
+
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
 import org.harrynoob.api.Utilities;
@@ -38,11 +39,5 @@ public class EquipWeapon extends Node {
 			System.out.println("Succesfully equipped weapon!");
 			return;
 		}
-	}
-	
-	@Override
-	public String toString()
-	{
-		return "EquipWeapon";
 	}
 }

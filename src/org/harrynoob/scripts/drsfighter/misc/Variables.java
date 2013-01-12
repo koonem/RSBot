@@ -1,5 +1,6 @@
 package org.harrynoob.scripts.drsfighter.misc;
 
+
 import org.harrynoob.scripts.drsfighter.gui.MainPanel;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.util.Filter;

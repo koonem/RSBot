@@ -1,5 +1,6 @@
 package org.harrynoob.scripts.drsfighter.node;
 
+
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
@@ -36,10 +37,5 @@ public class TargetSwitcher extends Node {
 
 				});
 		return p != null && p.length > 0;
-	}
-	
-	public String toString()
-	{
-		return "TargetSwitcher";
 	}
 }

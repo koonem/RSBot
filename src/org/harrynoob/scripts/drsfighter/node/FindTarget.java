@@ -1,5 +1,6 @@
 package org.harrynoob.scripts.drsfighter.node;
 
+
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.Task;

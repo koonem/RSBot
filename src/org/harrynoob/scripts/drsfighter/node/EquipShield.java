@@ -1,5 +1,6 @@
 package org.harrynoob.scripts.drsfighter.node;
 
+
 import org.harrynoob.api.Actionbar;
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
@@ -38,10 +39,5 @@ public class EquipShield extends Node {
 			System.out.println("Succesfully equipped shield!");
 			return;
 		}
-	}
-	
-	public String toString() 
-	{
-		return "EquipShield";
 	}
 }
