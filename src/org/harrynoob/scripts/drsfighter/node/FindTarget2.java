@@ -38,9 +38,10 @@ public class FindTarget2 extends Node {
 			
 	@Override
 	public boolean activate() {
-		return !hasTarget() || (!attacksCurrentTarget() && hasPossibleTargets())
+		return Players.getLocal().getHealthPercent() > 50
+				&& (!hasTarget() || (!attacksCurrentTarget() && hasPossibleTargets())
 				|| (Variables.failsafeTimer != null
-				&& Variables.failsafeTimer.getRemaining() == 0);
+				&& Variables.failsafeTimer.getRemaining() == 0));
 	}
 
 	@Override
@@ -50,14 +51,15 @@ public class FindTarget2 extends Node {
 		{
 			Variables.failsafeTimer = null;
 			DRSFighter.instance.status = "Attacking new target";
-			if(!Utilities.isOnScreen(newTarget))
+			Utilities.waitFor(new Condition()
 			{
-				Camera.turnTo(newTarget);
-				if(!Utilities.isOnScreen(newTarget))
+				public boolean validate()
 				{
-					return;
+					Camera.setPitch(false);
+					Camera.turnTo(newTarget);
+					return Utilities.isOnScreen(newTarget);
 				}
-			}
+			}, 3000);
 			if(Utilities.waitFor(new Condition()
 			{
 				public boolean validate()
@@ -76,7 +78,7 @@ public class FindTarget2 extends Node {
 		}
 		else
 		{
-			Walking.walk(Variables.VARROCK_CENTRAL_TILE);
+			Walking.walk(Utilities.getMidTile(Variables.SPIDER_ID));
 		}
 	}
 	

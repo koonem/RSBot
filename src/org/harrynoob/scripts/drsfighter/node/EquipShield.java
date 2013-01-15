@@ -5,6 +5,7 @@ import org.harrynoob.api.Actionbar;
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
 import org.harrynoob.api.Utilities;
+import org.harrynoob.api.Actionbar.Ability;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
@@ -20,7 +21,8 @@ public class EquipShield extends Node {
 				&& Inventory.getItem(Variables.shieldID) != null
 				/*&& Equipment.appearanceContainsOneOf(Variables.weaponID)*/
 				&& Percentages.getHealthPercent(Players.getLocal().get()) < 70
-				&& Actionbar.getAdrenalinPercent() == 100;
+				&& Actionbar.getAdrenalinPercent() == 100
+				&& isRejuvUsable();
 	}
 
 	@Override
@@ -39,5 +41,18 @@ public class EquipShield extends Node {
 			System.out.println("Succesfully equipped shield!");
 			return;
 		}
+	}
+	
+	private boolean isRejuvUsable()
+	{
+		for(Actionbar.Slot slot : Actionbar.Slot.values())
+		{
+			Ability x = Actionbar.getAbilityAt(slot.getIndex());
+			if(x != null && x.equals(Actionbar.Defence_Abilities.REJUVENATE))
+			{
+				if(slot.isAvailable()) return true;
+			}
+		}
+		return false;
 	}
 }
