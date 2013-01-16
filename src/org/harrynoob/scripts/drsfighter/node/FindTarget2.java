@@ -51,15 +51,15 @@ public class FindTarget2 extends Node {
 		{
 			Variables.failsafeTimer = null;
 			DRSFighter.instance.status = "Attacking new target";
-			Utilities.waitFor(new Condition()
-			{
-				public boolean validate()
+			Camera.setPitch(true);
+			if(!Utilities.isOnScreen(newTarget))
+				Utilities.waitFor(new Condition()
 				{
-					Camera.setPitch(false);
-					Camera.turnTo(newTarget);
-					return Utilities.isOnScreen(newTarget);
-				}
-			}, 3000);
+					public boolean validate()
+					{
+						return Utilities.isOnScreen(newTarget);
+					}
+				}, 3000);
 			if(Utilities.waitFor(new Condition()
 			{
 				public boolean validate()

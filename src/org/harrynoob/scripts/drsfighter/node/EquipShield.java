@@ -1,11 +1,11 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-
 import org.harrynoob.api.Actionbar;
+import org.harrynoob.api.Actionbar.Slot;
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
 import org.harrynoob.api.Utilities;
-import org.harrynoob.api.Actionbar.Ability;
+import org.harrynoob.api.Actionbar.Defence_Abilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
@@ -45,13 +45,10 @@ public class EquipShield extends Node {
 	
 	private boolean isRejuvUsable()
 	{
-		for(Actionbar.Slot slot : Actionbar.Slot.values())
+		final Slot s = Actionbar.getSlotWithAbility(Defence_Abilities.REJUVENATE);
+		if(s != null && s.getAvailableWidget() != null && s.getAvailableWidget().validate())
 		{
-			Ability x = Actionbar.getAbilityAt(slot.getIndex());
-			if(x != null && x.equals(Actionbar.Defence_Abilities.REJUVENATE))
-			{
-				if(slot.isAvailable()) return true;
-			}
+			return true;
 		}
 		return false;
 	}
