@@ -1,6 +1,5 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-
 import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
@@ -21,9 +20,11 @@ public class FoodEater extends Node {
 		// TODO Auto-generated method stub
 		DRSFighter.instance.status = "Eating food";
 		Utilities.ensureInventoryTab();
-		if(Inventory.getItem(Variables.FOOD_IDS).getWidgetChild() != null && Inventory.getItem(Variables.FOOD_IDS).getWidgetChild().validate())
-		{
-			Inventory.getItem(Variables.FOOD_IDS).getWidgetChild().interact("Eat");
+		if (Inventory.getItem(Variables.FOOD_IDS).getWidgetChild() != null
+				&& Inventory.getItem(Variables.FOOD_IDS).getWidgetChild()
+						.validate()) {
+			Inventory.getItem(Variables.FOOD_IDS).getWidgetChild()
+					.interact("Eat");
 		}
 	}
 

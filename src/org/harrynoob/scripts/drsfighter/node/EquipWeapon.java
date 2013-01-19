@@ -1,6 +1,5 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-
 import org.harrynoob.api.Condition;
 import org.harrynoob.api.Percentages;
 import org.harrynoob.api.Utilities;
@@ -17,10 +16,10 @@ public class EquipWeapon extends Node {
 	public boolean activate() {
 		return Variables.switchWeapons
 				&& Inventory.getItem(Variables.weaponID) != null
-				/*&& Equipment.appearanceContainsOneOf(Variables.shieldID)*/
-				&& ((Variables.rejuvTimer != null 
-				&& Variables.rejuvTimer.getRemaining() == 0)
-				|| Percentages.getHealthPercent(Players.getLocal().get()) > 90);
+				/* && Equipment.appearanceContainsOneOf(Variables.shieldID) */
+				&& ((Variables.rejuvTimer != null && Variables.rejuvTimer
+						.getRemaining() == 0) || Percentages
+						.getHealthPercent(Players.getLocal().get()) > 90);
 	}
 
 	@Override
@@ -28,14 +27,11 @@ public class EquipWeapon extends Node {
 		Utilities.ensureInventoryTab();
 		DRSFighter.instance.status = "Switching to weapon";
 		Equipment.equip(Variables.weaponID);
-		if(Utilities.waitFor(new Condition()
-		{
-			public boolean validate()
-			{
+		if (Utilities.waitFor(new Condition() {
+			public boolean validate() {
 				return Equipment.containsOneOf(Variables.weaponID);
 			}
-		}, 3000))
-		{
+		}, 3000)) {
 			System.out.println("Succesfully equipped weapon!");
 			return;
 		}

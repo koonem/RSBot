@@ -1,6 +1,5 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.Task;
@@ -22,23 +21,25 @@ public class CharmLooter extends Node {
 				&& GroundItems.getNearest(Variables.CHARM_IDS) != null
 				&& !Players.getLocal().isMoving()
 				&& Players.getLocal().getInteracting() == null
-				&& (DRSFighter.instance.getCurrentTarget() == null
-				|| (DRSFighter.instance.getCurrentTarget() != null && !DRSFighter.instance.getCurrentTarget().validate()));
-				
+				&& (DRSFighter.instance.getCurrentTarget() == null || (DRSFighter.instance
+						.getCurrentTarget() != null && !DRSFighter.instance
+						.getCurrentTarget().validate()));
+
 	}
 
 	@Override
 	public void execute() {
 		GroundItem charm = GroundItems.getNearest(Variables.CHARM_IDS);
 		WidgetChild actionBarWidget = Widgets.get(640, 6);
-		if(charm != null)
-		{
+		if (charm != null) {
 			DRSFighter.instance.status = "Looting charms";
-			if((actionBarWidget != null && actionBarWidget.contains(charm.getCentralPoint()) || !Calculations.isOnScreen(charm.getCentralPoint())))
-			{
+			if ((actionBarWidget != null
+					&& actionBarWidget.contains(charm.getCentralPoint()) || !Calculations
+						.isOnScreen(charm.getCentralPoint()))) {
 				Camera.turnTo(charm);
-				if((actionBarWidget != null && actionBarWidget.contains(charm.getCentralPoint()) || !Calculations.isOnScreen(charm.getCentralPoint())))
-				{
+				if ((actionBarWidget != null
+						&& actionBarWidget.contains(charm.getCentralPoint()) || !Calculations
+							.isOnScreen(charm.getCentralPoint()))) {
 					Walking.walk(Variables.VARROCK_CENTRAL_TILE);
 				}
 			}

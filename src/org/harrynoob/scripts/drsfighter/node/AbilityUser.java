@@ -1,6 +1,5 @@
 package org.harrynoob.scripts.drsfighter.node;
 
-
 import org.harrynoob.api.Actionbar;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
@@ -23,15 +22,14 @@ public class AbilityUser extends Node {
 	@Override
 	public void execute() {
 		Variables.failsafeTimer = null;
-        prepareAbility();
-		for(int i = 0; i < 12; i++)
-		{
-			if(Actionbar.getSlot(i).isAvailable() 
-					&& Actionbar.getAbilityAt(i) != null 
+		prepareAbility();
+		for (int i = 0; i < 12; i++) {
+			if (Actionbar.getSlot(i).isAvailable()
+					&& Actionbar.getAbilityAt(i) != null
 					&& Actionbar.getAbilityAt(i).getAbilityType() == Actionbar.AbilityType.BASIC
-					&& Actionbar.getSlotStateAt(i).equals(Actionbar.SlotState.ABILITY)
-					&& !Actionbar.getSlot(i).getCooldownWidget().isOnScreen())
-			{
+					&& Actionbar.getSlotStateAt(i).equals(
+							Actionbar.SlotState.ABILITY)
+					&& !Actionbar.getSlot(i).getCooldownWidget().isOnScreen()) {
 				DRSFighter.instance.status = "Using basic abilities";
 				Actionbar.getSlot(i).activate(true);
 				Task.sleep(500);
@@ -40,15 +38,14 @@ public class AbilityUser extends Node {
 		}
 	}
 
-    private void prepareAbility()
-    {
-        if(Widgets.get(137, 56).isOnScreen() && !Widgets.get(137, 56).getText().equalsIgnoreCase("[Press Enter to Chat]"))
-        {
-            Keyboard.sendKey('\u001B');
-            Task.sleep(400);
-            Keyboard.sendKey('\u001B');
-        }
-    }
-
+	private void prepareAbility() {
+		if (Widgets.get(137, 56).isOnScreen()
+				&& !Widgets.get(137, 56).getText()
+						.equalsIgnoreCase("[Press Enter to Chat]")) {
+			Keyboard.sendKey('\u001B');
+			Task.sleep(400);
+			Keyboard.sendKey('\u001B');
+		}
+	}
 
 }

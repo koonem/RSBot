@@ -19,10 +19,9 @@ public class EquipShield extends Node {
 	public boolean activate() {
 		return Variables.switchWeapons
 				&& Inventory.getItem(Variables.shieldID) != null
-				/*&& Equipment.appearanceContainsOneOf(Variables.weaponID)*/
+				/* && Equipment.appearanceContainsOneOf(Variables.weaponID) */
 				&& Percentages.getHealthPercent(Players.getLocal().get()) < 70
-				&& Actionbar.getAdrenalinPercent() == 100
-				&& isRejuvUsable();
+				&& Actionbar.getAdrenalinPercent() == 100 && isRejuvUsable();
 	}
 
 	@Override
@@ -30,24 +29,21 @@ public class EquipShield extends Node {
 		DRSFighter.instance.status = "Switching to shield";
 		Utilities.ensureInventoryTab();
 		Equipment.equip(Variables.shieldID);
-		if(Utilities.waitFor(new Condition()
-		{
-			public boolean validate()
-			{
+		if (Utilities.waitFor(new Condition() {
+			public boolean validate() {
 				return Equipment.containsOneOf(Variables.shieldID);
 			}
-		}, 4000))
-		{
+		}, 4000)) {
 			System.out.println("Succesfully equipped shield!");
 			return;
 		}
 	}
-	
-	private boolean isRejuvUsable()
-	{
-		final Slot s = Actionbar.getSlotWithAbility(Defence_Abilities.REJUVENATE);
-		if(s != null && s.getAvailableWidget() != null && s.getAvailableWidget().validate())
-		{
+
+	private boolean isRejuvUsable() {
+		final Slot s = Actionbar
+				.getSlotWithAbility(Defence_Abilities.REJUVENATE);
+		if (s != null && s.getAvailableWidget() != null
+				&& s.getAvailableWidget().validate()) {
 			return true;
 		}
 		return false;
