@@ -9,7 +9,9 @@ public class FailsafeTimer extends Node {
 
 	@Override
 	public boolean activate() {
-		return Players.getLocal().getInteracting() == null
+		return (Players.getLocal().getInteracting() == null
+				|| (Players.getLocal().getInteracting() != null
+				&& !Players.getLocal().getInteracting().validate()))
 				&& Variables.failsafeTimer == null
 				&& !Players.getLocal().isMoving();
 	}

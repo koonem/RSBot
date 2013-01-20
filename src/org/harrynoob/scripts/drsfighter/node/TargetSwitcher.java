@@ -1,7 +1,6 @@
 package org.harrynoob.scripts.drsfighter.node;
 
 import org.harrynoob.scripts.drsfighter.DRSFighter;
-import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.wrappers.interactive.Player;
@@ -19,17 +18,16 @@ public class TargetSwitcher extends Node {
 	@Override
 	public void execute() {
 		DRSFighter.instance.setCurrentTarget(null);
-		Task.sleep(500);
-		DRSFighter.instance.findNewTarget();
 	}
 
 	private boolean targetHasOtherEnemies() {
 		Player[] p = Players.getLoaded(new Filter<Player>() {
 			public boolean accept(Player p) {
-				return !p.get().equals(Players.getLocal().get())
+				return !p.getName().equals(Players.getLocal().getName())
 						&& p.getInteracting() != null
+						&& Players.getLocal().getInteracting() != null
 						&& p.getInteracting().equals(
-								DRSFighter.instance.getCurrentTarget());
+								Players.getLocal().getInteracting());
 			}
 
 		});

@@ -8,7 +8,6 @@ import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.methods.tab.Inventory;
-import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.node.GroundItem;
 
@@ -33,10 +32,10 @@ public class SpinEffigy extends Node {
 			final GroundItem g = GroundItems.getNearest(new int[] {
 					Variables.EFFIGY_ID, Variables.SPIN_TICKET_ID });
 			if (!Utilities.isOnScreen(g))
-				Camera.turnTo(g);
+				Utilities.cameraTurnTo(g);
 			final int i = Inventory.getCount(new int[] { Variables.EFFIGY_ID,
 					Variables.SPIN_TICKET_ID });
-			g.interact("Take");
+			g.interact("Take", g.getGroundItem().getName());
 			if (Utilities.waitFor(new Condition() {
 
 				@Override

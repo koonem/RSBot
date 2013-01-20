@@ -452,7 +452,7 @@ public class Actionbar
         FREEDOM(35, "Freedom", 30, AbilityType.BASIC),
         REFLECT(115, "Reflect", 15, AbilityType.THRESHOLD),
         RESONANCE(67, "Resonance", 30, AbilityType.BASIC),
-        REJUVENATE(179, "Rejuvenate", 60, AbilityType.ULTIMATE),
+        REJUVENATE(179, "Rejuvenate", 300, AbilityType.ULTIMATE),
         DEBILITATE(131, "Debilitate", 30, AbilityType.THRESHOLD),
         PREPARATION(83, "Preparation", 5, AbilityType.BASIC),
         BARRICADE(163, "Barricade", 60, AbilityType.ULTIMATE);

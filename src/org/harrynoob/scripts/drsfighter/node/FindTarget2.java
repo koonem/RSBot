@@ -10,7 +10,8 @@ import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.methods.tab.Equipment;
+import org.powerbot.game.api.methods.tab.Summoning;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 
@@ -18,14 +19,18 @@ public class FindTarget2 extends Node {
 
 	private Filter<NPC> otherEnemyFilter = new Filter<NPC>() {
 		public boolean accept(NPC n) {
-			return n.getId() > 0 && n.getInteracting() != null
-					&& n.getInteracting().equals(Players.getLocal());
+			return (n.getId() > 0 || !(Summoning.getFamiliar() != null
+					&& Summoning.getFamiliar().getId() == n.getId()))
+					&& n.getInteracting() != null
+					&& n.getInteracting().equals(Players.getLocal())
+					&& n.getAnimation() != 5329;
 		}
 	};
 
 	private Filter<NPC> normalFilter = new Filter<NPC>() {
 		public boolean accept(NPC n) {
 			return n.getId() == Variables.SPIDER_ID
+					&& n.getAnimation() != 5329
 					&& (n.getInteracting() == null || (n.getInteracting() != null && !n
 							.getInteracting().validate()));
 		}
@@ -35,8 +40,13 @@ public class FindTarget2 extends Node {
 	public boolean activate() {
 		return Players.getLocal().getHealthPercent() > 50
 				&& (!hasTarget()
-						|| (!attacksCurrentTarget() && hasPossibleTargets()) || (Variables.failsafeTimer != null && Variables.failsafeTimer
-						.getRemaining() == 0));
+						|| (!attacksCurrentTarget() && hasPossibleTargets()) 
+						|| currentTargetDying()
+						|| (Variables.failsafeTimer != null && Variables.failsafeTimer
+						.getRemaining() == 0))
+				&& (!Variables.switchWeapons
+						|| (Variables.switchWeapons 
+								&& Equipment.containsOneOf(Variables.weaponID)));
 	}
 
 	@Override
@@ -46,11 +56,10 @@ public class FindTarget2 extends Node {
 		if (newTarget != null && newTarget.validate()
 				&& newTarget.getLocation().canReach()) {
 			DRSFighter.instance.status = "Attacking new target";
-			Camera.setPitch(true);
 			if (!Utilities.isOnScreen(newTarget))
 				Utilities.waitFor(new Condition() {
 					public boolean validate() {
-						Camera.turnTo(newTarget);
+						Utilities.cameraTurnTo(newTarget);
 						return Utilities.isOnScreen(newTarget);
 					}
 				}, 2000);
@@ -64,8 +73,9 @@ public class FindTarget2 extends Node {
 				}
 			}, 1000)) {
 				DRSFighter.instance.setCurrentTarget(newTarget);
-			} else {
-				Camera.turnTo(newTarget);
+			}
+			else {
+				Utilities.cameraTurnTo(newTarget);
 			}
 		} else {
 			Walking.walk(Utilities.getMidTile(Variables.SPIDER_ID));
@@ -94,7 +104,9 @@ public class FindTarget2 extends Node {
 	private NPC getNewTarget() {
 		if (otherEnemies()) {
 			return NPCs.getNearest(otherEnemyFilter);
-		} else if (attacksOtherThanTarget()) {
+		} else if (attacksOtherThanTarget()
+				&& Players.getLocal().getInteracting() != null
+				&& Players.getLocal().getInteracting().getId() > 0) {
 			return (NPC) Players.getLocal().getInteracting();
 		}
 		return NPCs.getNearest(normalFilter);
@@ -119,5 +131,10 @@ public class FindTarget2 extends Node {
 			if (Widgets.get(750, 2) != null && Widgets.get(750, 2).validate())
 				Widgets.get(750, 2).click(true);
 		}
+	}
+	
+	private boolean currentTargetDying() {
+		return Players.getLocal().getInteracting() != null
+				&& Players.getLocal().getInteracting().getAnimation() == 5329;
 	}
 }
