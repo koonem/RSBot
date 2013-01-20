@@ -46,7 +46,7 @@ public class FindTarget2 extends Node {
 						.getRemaining() == 0))
 				&& (!Variables.switchWeapons
 						|| (Variables.switchWeapons 
-								&& Equipment.containsOneOf(Variables.weaponID)));
+								&& Equipment.appearanceContainsOneOf(Variables.weaponID)));
 	}
 
 	@Override
