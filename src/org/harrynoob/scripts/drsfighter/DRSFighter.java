@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import org.harrynoob.api.Debugger;
 import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.gui.MainPanel;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
@@ -36,7 +37,7 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", topic = 899074, version = 1.14, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(name = "DRSFighter", topic = 899074, version = 1.15, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener,
 		MouseListener, MessageListener {
 
@@ -46,6 +47,7 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 			new FoodEater(), new EquipShield(), new RejuvenateUser(),
 			new UltimateUser(), new ThresholdUser(), new AbilityUser() };
 	public static DRSFighter instance;
+	public Debugger d;
 	public MainPanel main;
 	public boolean activated;
 	private NPC currentTarget;
@@ -54,7 +56,7 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 
 	private int xpHour;
 	private int startxp;
-	private Timer timer;
+	public Timer timer;
 	private long startTime;
 	private boolean paintShown;
 	public String status;
@@ -66,6 +68,9 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 		startTime = System.currentTimeMillis();
 		startxp = -1;
 		// paint = new Painter();
+		d = new Debugger();
+		d.logMessage("Started DRSFighter");
+		d.logMessage("This can be closed & opened again through the paint");
 		try {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -125,6 +130,8 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 	public void onStop() {
 		if (main != null)
 			main.setVisible(false);
+		if(d != null)
+			d.setVisible(false);
 		JOptionPane
 				.showMessageDialog(
 						null,
@@ -138,6 +145,7 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 		timer = new Timer(0);
 		startTime = System.currentTimeMillis();
 		startxp = getCombatXp();
+		d.logMessage("Activated DRSFighter. Switching: "+Variables.switchWeapons+" Looting: "+Variables.lootCharms);
 	}
 
 	public NPC getCurrentTarget() {
@@ -271,6 +279,10 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 						|| Variables.rejuvUsed != 0 ? (System
 						.currentTimeMillis() - Variables.firstRejuvMillis)
 						/ Variables.rejuvUsed : 0);
+	}
+	
+	public static Debugger getDebugger() {
+		return instance.d;
 	}
 
 }

@@ -26,6 +26,7 @@ public class EquipWeapon extends Node {
 	public void execute() {
 		Utilities.ensureInventoryTab();
 		DRSFighter.instance.status = "Switching to weapon";
+		DRSFighter.getDebugger().logMessage("Switching to weapon");
 		Equipment.equip(Variables.weaponID);
 		if (Utilities.waitFor(new Condition() {
 			public boolean validate() {
@@ -33,6 +34,7 @@ public class EquipWeapon extends Node {
 			}
 		}, 3000)) {
 			System.out.println("Succesfully equipped weapon!");
+			DRSFighter.getDebugger().logMessage("Succesfully equipped weapon");
 			return;
 		}
 	}

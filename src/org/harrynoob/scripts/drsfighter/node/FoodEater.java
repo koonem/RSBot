@@ -19,6 +19,7 @@ public class FoodEater extends Node {
 	public void execute() {
 		// TODO Auto-generated method stub
 		DRSFighter.instance.status = "Eating food";
+		DRSFighter.getDebugger().logMessage("Eating "+Inventory.getItem(Variables.FOOD_IDS).getName());
 		Utilities.ensureInventoryTab();
 		if (Inventory.getItem(Variables.FOOD_IDS).getWidgetChild() != null
 				&& Inventory.getItem(Variables.FOOD_IDS).getWidgetChild()

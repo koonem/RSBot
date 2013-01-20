@@ -52,6 +52,10 @@ public class FindTarget2 extends Node {
 	@Override
 	public void execute() {
 		enableRun();
+		DRSFighter.getDebugger().logMessage(String.format(DRSFighter.instance.timer.toElapsedString()
+				+"\tHas target: %b\tAttacks current target: %b" +
+				"\nHas possible targets: %b\tCurrent interacting dying: %b",
+				hasTarget(), attacksCurrentTarget(), hasPossibleTargets(), currentTargetDying()));
 		final NPC newTarget = getNewTarget();
 		if (newTarget != null && newTarget.validate()
 				&& newTarget.getLocation().canReach()) {
@@ -73,9 +77,11 @@ public class FindTarget2 extends Node {
 				}
 			}, 1000)) {
 				DRSFighter.instance.setCurrentTarget(newTarget);
+				DRSFighter.getDebugger().logMessage("Attacking new target.");
 			}
 			else {
 				Utilities.cameraTurnTo(newTarget);
+				DRSFighter.getDebugger().logMessage("Rotating camera");
 			}
 		} else {
 			Walking.walk(Utilities.getMidTile(Variables.SPIDER_ID));
@@ -84,7 +90,8 @@ public class FindTarget2 extends Node {
 
 	private boolean hasTarget() {
 		return !(getTarget() == null || (getTarget() != null && !getTarget()
-				.validate()));
+				.validate()))
+				&& Players.getLocal().getInteracting() != null;
 	}
 
 	private boolean attacksCurrentTarget() {
@@ -102,9 +109,9 @@ public class FindTarget2 extends Node {
 	}
 
 	private NPC getNewTarget() {
-		if (otherEnemies()) {
+		if (otherEnemies())
 			return NPCs.getNearest(otherEnemyFilter);
-		} else if (attacksOtherThanTarget()
+		if (attacksOtherThanTarget()
 				&& Players.getLocal().getInteracting() != null
 				&& Players.getLocal().getInteracting().getId() > 0) {
 			return (NPC) Players.getLocal().getInteracting();
