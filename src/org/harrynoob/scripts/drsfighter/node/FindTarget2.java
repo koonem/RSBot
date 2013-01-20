@@ -22,7 +22,7 @@ public class FindTarget2 extends Node {
 			return (n.getId() > 0 || !(Summoning.getFamiliar() != null
 					&& Summoning.getFamiliar().getId() == n.getId()))
 					&& n.getInteracting() != null
-					&& n.getInteracting().equals(Players.getLocal())
+					&& n.getInteracting().getName().equals(Players.getLocal().getName())
 					&& n.getAnimation() != 5329;
 		}
 	};
