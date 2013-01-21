@@ -17,7 +17,7 @@ public class Utilities {
 	public static boolean waitFor(final Condition c, final long timeout) {
 		final Timer t = new Timer(timeout);
 		while (t.isRunning() && !c.validate()) {
-			Task.sleep(20);
+			Task.sleep(50);
 		}
 		return c.validate();
 	}

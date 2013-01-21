@@ -14,8 +14,6 @@ public class AbilityUser extends Node {
 	@Override
 	public boolean activate() {
 		return Players.getLocal().getInteracting() != null
-				&& DRSFighter.instance.getCurrentTarget() != null
-				&& DRSFighter.instance.getCurrentTarget().validate()
 				&& !Players.getLocal().isMoving();
 	}
 

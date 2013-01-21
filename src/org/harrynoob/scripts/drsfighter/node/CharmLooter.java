@@ -30,7 +30,7 @@ public class CharmLooter extends Node {
 					return;
 				}
 			}
-			charm.interact("Take");
+			charm.interact("Take", charm.getGroundItem().getName());
 			Utilities.waitFor(new Condition(){
 				public boolean validate(){
 					return !charm.validate();
