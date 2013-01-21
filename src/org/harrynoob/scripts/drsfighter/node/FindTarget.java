@@ -5,6 +5,8 @@ import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Settings;
+import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Summoning;
@@ -64,10 +66,13 @@ public class FindTarget extends Node {
 	@Override
 	public void execute() {
 		final NPC newTarget;
+		enableRun();
+		DRSFighter.getDebugger().logMessage("Attacking new target");
 		newTarget = NPCs.getNearest(PRIORITY_FILTER) != null ? NPCs.getNearest(PRIORITY_FILTER) : NPCs.getNearest(POSSIBLE_FILTER);
 		if(newTarget != null && newTarget.validate()) {
 			if(!Utilities.isOnScreen(newTarget)) {
 				Utilities.cameraTurnTo(newTarget);
+				DRSFighter.getDebugger().logMessage("Rotating camera");
 			}
 			if(Utilities.waitFor(new Condition() {
 				public boolean validate() {
@@ -96,5 +101,12 @@ public class FindTarget extends Node {
 	
 	private NPC[] getPossibleTargets() {
 		return NPCs.getLoaded(POSSIBLE_FILTER);
+	}
+	
+	private void enableRun() {
+		if (Settings.get(Settings.SETTING_RUN_ENABLED) != 1) {
+			if (Widgets.get(750, 2) != null && Widgets.get(750, 2).validate())
+				Widgets.get(750, 2).click(true);
+		}
 	}
 }
