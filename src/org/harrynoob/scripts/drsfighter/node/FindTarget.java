@@ -32,8 +32,6 @@ public class FindTarget extends Node {
 	
 	private final Filter<NPC> PRIORITY_FILTER = new Filter<NPC>() {
 		public boolean accept(NPC n) {
-			DRSFighter.getDebugger().logMessage(String.format("%b%b",
-					n.getInteracting() != null, n.getInteracting() != null && n.getInteracting().equals(Players.getLocal().get())));
 			return !(Summoning.isFamiliarSummoned() && Summoning.getFamiliar().getId() == n.getId())
 					&& (n.getInteracting() != null
 					&& n.getInteracting().getName().equalsIgnoreCase(Players.getLocal().getName()))
