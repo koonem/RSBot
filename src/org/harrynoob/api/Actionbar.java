@@ -341,7 +341,7 @@ public class Actionbar
         PIERCING_SHOT(21, "Piercing Shot", 5, AbilityType.BASIC),
         SNAP_SHOT(117, "Snap Shot", 20, AbilityType.THRESHOLD),
         DEADSHOT(197, "Deadshot", 30, AbilityType.ULTIMATE),
-        SNIPE(89, "Snipe", 10, AbilityType.BASIC),
+        SNIPE(69, "Snipe", 10, AbilityType.BASIC),
         BINDING_SHOT(37, "Binding Shot", 15, AbilityType.BASIC),
         FRAGMENTATION_SHOT(85, "Fragmentation Shot", 30, AbilityType.BASIC),
         ESCAPE(53, "Escape", 20, AbilityType.BASIC),

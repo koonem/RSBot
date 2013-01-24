@@ -1,5 +1,6 @@
 package org.harrynoob.api;
 
+import org.i;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Tabs;
 import org.powerbot.game.api.methods.Widgets;
@@ -37,7 +38,7 @@ public class Utilities {
 	}
 
 	public static void ensureActionBar(boolean flag) {
-		if (flag) {
+		/*if (flag) {
 			WidgetChild actionbar = Widgets.get(640, 6);
 			if (actionbar != null && !actionbar.isOnScreen()) {
 				WidgetChild abToggle = Widgets.get(640, 28);
@@ -52,6 +53,14 @@ public class Utilities {
 				if (abToggle != null) {
 					abToggle.interact("Minimise");
 				}
+			}
+		} */
+		WidgetChild actionbar = Widgets.get(640, 6);
+		if(flag == actionbar.isOnScreen()) return;
+		if(flag ? !actionbar.isOnScreen() : actionbar.isOnScreen()) {
+			WidgetChild toggle = Widgets.get(640, flag ? 28 : 30);
+			if(toggle != null && toggle.isOnScreen()) {
+				toggle.interact(flag ? "Expand" : "Minimise");
 			}
 		}
 	}

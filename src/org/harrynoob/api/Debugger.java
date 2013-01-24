@@ -1,6 +1,7 @@
 package org.harrynoob.api;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -21,7 +22,9 @@ public class Debugger extends JFrame{
 		super("Debug console");
 		debugField = new JTextArea();
 		debugField.setEditable(false);
-		DefaultCaret c = ((DefaultCaret)debugField.getCaret());
+		debugField.setLineWrap(true);
+		debugField.setFont(new Font("Arial", Font.PLAIN, 14));
+		DefaultCaret c = ((DefaultCaret) debugField.getCaret());
 		c.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		jps = new JScrollPane(debugField);
 		add(jps);
@@ -35,7 +38,5 @@ public class Debugger extends JFrame{
 	
 	public void logMessage(String s){
 		debugField.append(s + "\n");
-		if(this.getHeight() < Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2)
-			this.pack();
 	}	
 }

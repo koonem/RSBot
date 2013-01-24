@@ -38,6 +38,8 @@ public class Variables {
 	public static long firstRejuvMillis;
 	public static int rejuvUsed = 0;
 		
+	public static boolean mouseHop = false;
+	
 	public enum FightLocation
 	{
 		VARROCK(new Tile(3144, 9840, -1), "Varrock Sewers", "Varrock East", new Tile(3179, 9886, 0)),

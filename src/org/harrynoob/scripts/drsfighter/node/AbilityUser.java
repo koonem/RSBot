@@ -28,6 +28,7 @@ public class AbilityUser extends Node {
 					&& Actionbar.getSlotStateAt(i).equals(
 							Actionbar.SlotState.ABILITY)
 					&& !Actionbar.getSlot(i).getCooldownWidget().isOnScreen()) {
+				DRSFighter.getDebugger().logMessage("Using Basic ability: "+Actionbar.getAbilityAt(i).getName());
 				DRSFighter.instance.status = "Using basic abilities";
 				Actionbar.getSlot(i).activate(true);
 				Task.sleep(500);

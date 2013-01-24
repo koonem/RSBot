@@ -1,5 +1,3 @@
-import org.powerbot.game.api.methods.interactive.Players;
-import org.powerbot.game.api.methods.node.GroundItems;
 
 public class test {
 

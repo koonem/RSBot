@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.wrappers.node.Item;
 
@@ -75,6 +76,7 @@ public class MainPanel extends JFrame implements WindowListener {
 	private JComponent finishPane;
 	private JButton startButton;
 	private JCheckBox looting;
+	private JCheckBox devMode;
 	// private JButton saveButton;
 
 	private JComponent donatePane;
@@ -173,8 +175,11 @@ public class MainPanel extends JFrame implements WindowListener {
 		imageLabel = new JLabel("Link is in forum thread", JLabel.CENTER);
 		// imageLabel.addActionListener(panelListener);
 		donateLabel = new JLabel("Donate €1!", JLabel.CENTER);
+		devMode = new JCheckBox("Devmode (danger)");
+		devMode.setSelected(false);
 		panel.add(imageLabel, BorderLayout.CENTER);
 		panel.add(donateLabel, BorderLayout.NORTH);
+		panel.add(devMode, BorderLayout.SOUTH);
 		return panel;
 	}
 
@@ -273,6 +278,7 @@ public class MainPanel extends JFrame implements WindowListener {
 		b[2] = bankCheckBox.isSelected();
 		b[3] = foodCheckBox.isSelected() && b[2];
 		b[4] = looting.isSelected();
+		Variables.mouseHop = devMode.isSelected();
 		return b;
 	}
 

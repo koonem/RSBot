@@ -1,10 +1,8 @@
 package org.harrynoob.scripts.drsfighter;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,6 +14,7 @@ import javax.swing.SwingUtilities;
 import org.harrynoob.api.Debugger;
 import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.gui.MainPanel;
+import org.harrynoob.scripts.drsfighter.gui.Painter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.harrynoob.scripts.drsfighter.node.*;
 import org.powerbot.core.event.events.MessageEvent;
@@ -27,17 +26,15 @@ import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.input.Keyboard;
-import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Skills;
 import org.powerbot.game.api.methods.widget.WidgetCache;
-import org.powerbot.game.api.util.Time;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", topic = 899074, version = 1.16, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(name = "DRSFighter", topic = 899074, version = 1.17, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener,
 		MouseListener, MessageListener {
 
@@ -52,12 +49,10 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 	public boolean activated;
 	private NPC currentTarget;
 	private Client client = Context.client();
-	// private Painter paint;
+	private Painter paint;
 
-	private int xpHour;
 	private int startxp;
 	public Timer timer;
-	private long startTime;
 	private boolean paintShown;
 	public String status;
 
@@ -65,9 +60,8 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 		instance = this;
 		paintShown = true;
 		status = "GUI";
-		startTime = System.currentTimeMillis();
 		startxp = -1;
-		// paint = new Painter();
+		paint = new Painter();
 		d = new Debugger();
 		d.logMessage("Started DRSFighter");
 		d.logMessage("This can be closed & opened again through the paint");
@@ -80,7 +74,7 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 						main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						main.setSize(600, 600);
 						main.setLocationRelativeTo(null);
-						main.setTitle("DRSFighter v1.16");
+						main.setTitle("DRSFighter v1.17");
 						main.pack();
 						main.setVisible(true);
 					} catch (Exception e) {
@@ -93,7 +87,6 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Mouse.setSpeed(Mouse.Speed.FAST);
 	}
 
 	@Override
@@ -143,7 +136,6 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 		activated = true;
 		Variables.initOptions(main);
 		timer = new Timer(0);
-		startTime = System.currentTimeMillis();
 		startxp = getCombatXp();
 		d.logMessage("Activated DRSFighter. Switching: "+Variables.switchWeapons+" Looting: "+Variables.lootCharms);
 	}
@@ -165,16 +157,6 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 				+ Skills.getExperience(Skills.CONSTITUTION);
 	}
 
-	private final Color color1 = new Color(0, 0, 0);
-	private final Color color2 = new Color(250, 250, 250);
-	private final Color color3 = new Color(40, 40, 40, 0);
-
-	private final BasicStroke stroke1 = new BasicStroke(5);
-
-	private final Font font1 = new Font("Felix Titling", 0, 19);
-	private final Font font2 = new Font("Felix Titling", 0, 14);
-	private final int y = 50;
-
 	public int getExpGain() {
 		if (startxp == 0) {
 			getCombatXp();
@@ -184,11 +166,10 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 	}
 
 	public void onRepaint(Graphics g1) {
-		xpHour = (int) ((getExpGain() * 3600000D) / (System.currentTimeMillis() - startTime));
 		Graphics2D g = (Graphics2D) g1;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		if (paintShown) {
+	/*	if (paintShown) {
 			g.setColor(new Color(150, 211 - 80, 128 - 80));
 			g.drawLine(Mouse.getX() - 5, Mouse.getY() - 5, Mouse.getX() + 5,
 					Mouse.getY() + 5);
@@ -233,16 +214,22 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 			g.drawString("XP P/H: " + xpHour, 53, 445 + y);
 			g.setColor(color3);
 			g.fillRect(10, 348 + y, 499, 123);
-		}
+		}*/
 
-		// paint.onRepaint(g1);
+		if(paintShown) paint.onRepaint(g1);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if (arg0.getX() < 510 && arg0.getX() > 10 && arg0.getY() > 398
-				&& arg0.getY() < 398 + 123)
-			paintShown = !paintShown;
+		Rectangle r = new Rectangle(454, 410, 506, 396);
+		r = new Rectangle(454, 396, 506 - 454, 410 - 396);
+		/*if (r.contains(arg0.getPoint()))
+			paintShown = !paintShown; */
+		//paintShown = paintShown ? !r.contains(arg0.getPoint()) : true ;
+		if(paintShown && r.contains(arg0.getPoint())) paintShown = false;
+		else if(!paintShown) paintShown = true;
+		getDebugger().logMessage(String.format("Mouse event: showPaint: %b, closePaint: %b", paintShown, r.contains(arg0.getPoint())));
+		//Als paint zichtbaar dan moet r.contains, anders sws enablen?
 	}
 
 	@Override
@@ -271,14 +258,6 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 			Keyboard.sendKey('\n');
 			Keyboard.sendText("He is the master", true);
 		}
-	}
-
-	private String getAverageRejuvTime() {
-		return Time
-				.format(Variables.firstRejuvMillis != 0
-						|| Variables.rejuvUsed != 0 ? (System
-						.currentTimeMillis() - Variables.firstRejuvMillis)
-						/ Variables.rejuvUsed : 0);
 	}
 	
 	public static Debugger getDebugger() {

@@ -7,9 +7,11 @@ import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.Widgets;
+import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.NPCs;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Summoning;
+import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.interactive.Player;
@@ -67,9 +69,10 @@ public class FindTarget extends Node {
 	public void execute() {
 		final NPC newTarget;
 		enableRun();
-		DRSFighter.getDebugger().logMessage("Attacking new target");
+		DRSFighter.getDebugger().logMessage("Finding new target");
 		newTarget = NPCs.getNearest(PRIORITY_FILTER) != null ? NPCs.getNearest(PRIORITY_FILTER) : NPCs.getNearest(POSSIBLE_FILTER);
 		if(newTarget != null && newTarget.validate()) {
+			DRSFighter.getDebugger().logMessage("Camera angle to new target: "+Camera.getMobileAngle(newTarget));
 			if(!Utilities.isOnScreen(newTarget)) {
 				Utilities.cameraTurnTo(newTarget);
 				DRSFighter.getDebugger().logMessage("Rotating camera");
@@ -79,18 +82,20 @@ public class FindTarget extends Node {
 					return Utilities.isOnScreen(newTarget);
 				}
 			}, 2000)) {
-				if (Utilities.waitFor(new Condition() {
+				if(Variables.mouseHop) Mouse.hop((int)newTarget.getCentralPoint().getX(), (int) newTarget.getCentralPoint().getY());
+				if(newTarget.interact("Attack", newTarget.getName()) && Utilities.waitFor(new Condition() {
 							public boolean validate() {
-								return ((newTarget.interact("Attack",
-										newTarget.getName())
-										|| Players.getLocal().isMoving())
+								return (Players.getLocal().isMoving()
 										|| Players.getLocal().getInteracting() != null)
 										&& POSSIBLE_FILTER.accept(newTarget);
 							}
 						}, 1000)) {
+					DRSFighter.getDebugger().logMessage("Attacking new target");
 					DRSFighter.instance.setCurrentTarget(newTarget);
 				}
 			}
+		} else {
+			DRSFighter.getDebugger().logMessage("Could not find any suitable targets.");
 		}
 	}
 		

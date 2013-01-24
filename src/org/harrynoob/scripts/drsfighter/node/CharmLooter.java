@@ -5,6 +5,7 @@ import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.GroundItems;
 import org.powerbot.game.api.wrappers.node.GroundItem;
@@ -30,6 +31,7 @@ public class CharmLooter extends Node {
 					return;
 				}
 			}
+			if(Variables.mouseHop) Mouse.hop((int)charm.getCentralPoint().getX(), (int)charm.getCentralPoint().getY());
 			charm.interact("Take", charm.getGroundItem().getName());
 			Utilities.waitFor(new Condition(){
 				public boolean validate(){
