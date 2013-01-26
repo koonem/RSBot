@@ -1,6 +1,8 @@
 package org.harrynoob.api;
 
-import org.i;
+import java.awt.Point;
+import java.awt.Polygon;
+
 import org.powerbot.core.script.job.Task;
 import org.powerbot.game.api.methods.Tabs;
 import org.powerbot.game.api.methods.Widgets;
@@ -13,8 +15,19 @@ import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Utilities.
+ */
 public class Utilities {
 
+	/**
+	 * Wait for condition.
+	 *
+	 * @param c the c
+	 * @param timeout the timeout
+	 * @return true, if successful
+	 */
 	public static boolean waitFor(final Condition c, final long timeout) {
 		final Timer t = new Timer(timeout);
 		while (t.isRunning() && !c.validate()) {
@@ -23,6 +36,12 @@ public class Utilities {
 		return c.validate();
 	}
 
+	/**
+	 * Checks if entity is on screen.
+	 *
+	 * @param e The entity
+	 * @return true, if e is on screen
+	 */
 	public static boolean isOnScreen(Entity e) {
 		ensureActionBar(true);
 		WidgetChild actionbar = Widgets.get(640, 6);
@@ -31,12 +50,40 @@ public class Utilities {
 						&& actionbar.isOnScreen() && actionbar
 						.getBoundingRectangle().contains(e.getCentralPoint())));
 	}
+	
+	/**
+	 * Enhanced check if entity is on screen.
+	 *
+	 * @param e The entity
+	 * @return true, if e is on screen
+	 */
+	public static boolean isOnScreenEnhanced(org.powerbot.game.api.wrappers.interactive.Character e) {
+		WidgetChild ab = Widgets.get(640, 6);
+		if(ab == null || !ab.isOnScreen() || e.getModel().getBounds().length == 0) return e.isOnScreen();
+		for(Polygon p : e.getModel().getBounds()) {
+			for(int i = 0; i < p.npoints; i++) {
+				Point a = new Point(p.xpoints[i], p.ypoints[i]);
+				if(ab.contains(a) || !e.isOnScreen()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
+	/**
+	 * Ensure inventory tab is open.
+	 */
 	public static void ensureInventoryTab() {
 		if (!Tabs.INVENTORY.isOpen())
 			Tabs.INVENTORY.open();
 	}
 
+	/**
+	 * Ensure action bar state equals flag.
+	 *
+	 * @param flag the flag
+	 */
 	public static void ensureActionBar(boolean flag) {
 		/*if (flag) {
 			WidgetChild actionbar = Widgets.get(640, 6);
@@ -65,6 +112,12 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * Gets the mid tile.
+	 *
+	 * @param id the id
+	 * @return the mid tile
+	 */
 	public static Tile getMidTile(int... id) {
 		TileComparator t = new TileComparator();
 		for (NPC n : NPCs.getLoaded(id)) {
@@ -74,6 +127,11 @@ public class Utilities {
 		return t.getComparison();
 	}
 
+	/**
+	 * Camera rotation method.
+	 *
+	 * @param loc A locatable entity
+	 */
 	public static void cameraTurnTo(final Locatable loc) {
 		Thread t = new Thread() {
 			public void run() {
