@@ -82,7 +82,11 @@ public class FindTarget extends Node {
 					return Utilities.isOnScreen(newTarget);
 				}
 			}, 2000)) {
-				if(Variables.mouseHop) Mouse.hop((int)newTarget.getCentralPoint().getX(), (int) newTarget.getCentralPoint().getY());
+				if(Variables.mouseHop) {
+					Mouse.hop((int)newTarget.getCentralPoint().getX(), (int) newTarget.getCentralPoint().getY());
+				} else {
+					Mouse.move(newTarget.getCentralPoint());
+				}
 				if(newTarget.interact("Attack", newTarget.getName()) && Utilities.waitFor(new Condition() {
 							public boolean validate() {
 								return (Players.getLocal().isMoving()
