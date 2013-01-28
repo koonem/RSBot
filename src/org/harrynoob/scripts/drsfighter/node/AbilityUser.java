@@ -1,6 +1,7 @@
 package org.harrynoob.scripts.drsfighter.node;
 
 import org.harrynoob.api.Actionbar;
+import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.DRSFighter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.powerbot.game.api.methods.Widgets;
@@ -14,6 +15,7 @@ public class AbilityUser extends Node {
 	@Override
 	public boolean activate() {
 		return Players.getLocal().getInteracting() != null
+				&& Players.getLocal().getInteracting().validate()
 				&& !Players.getLocal().isMoving();
 	}
 
@@ -21,6 +23,7 @@ public class AbilityUser extends Node {
 	public void execute() {
 		Variables.failsafeTimer = null;
 		prepareAbility();
+		Utilities.ensureActionBar(true);
 		for (int i = 0; i < 12; i++) {
 			if (Actionbar.getSlot(i).isAvailable()
 					&& Actionbar.getAbilityAt(i) != null
