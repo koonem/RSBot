@@ -117,8 +117,4 @@ public class FindTarget extends Node {
 				Widgets.get(750, 2).click(true);
 		}
 	}
-	
-	private boolean notNearPortal() {
-		return true;
-	}
 }

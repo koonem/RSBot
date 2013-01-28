@@ -25,7 +25,6 @@ import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.input.Keyboard;
-import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Skills;
 import org.powerbot.game.api.methods.widget.WidgetCache;
@@ -34,7 +33,7 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", topic = 899074, version = 1.18, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(name = "DRSFighter", topic = 899074, version = 1.19, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener,
 		MouseListener, MessageListener {
 
@@ -76,7 +75,7 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 						System.out.println("Main created");
 						main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						main.setLocationRelativeTo(null);
-						main.setTitle("DRSFighter v1.18");
+						main.setTitle("DRSFighter v1.19");
 						main.pack();
 						main.setVisible(true);
 					} catch (Exception e) {
