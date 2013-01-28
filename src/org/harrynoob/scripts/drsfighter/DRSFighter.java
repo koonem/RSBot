@@ -17,7 +17,6 @@ import org.harrynoob.scripts.drsfighter.gui.MainPanel;
 import org.harrynoob.scripts.drsfighter.gui.Painter;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 import org.harrynoob.scripts.drsfighter.node.*;
-import org.powerbot.core.event.events.MessageEvent;
 import org.powerbot.core.event.listeners.MessageListener;
 import org.powerbot.core.event.listeners.PaintListener;
 import org.powerbot.core.script.ActiveScript;
@@ -26,6 +25,7 @@ import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.Manifest;
 import org.powerbot.game.api.methods.Game;
 import org.powerbot.game.api.methods.input.Keyboard;
+import org.powerbot.game.api.methods.input.Mouse;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Skills;
 import org.powerbot.game.api.methods.widget.WidgetCache;
@@ -38,7 +38,8 @@ import org.powerbot.game.client.Client;
 public class DRSFighter extends ActiveScript implements PaintListener,
 		MouseListener, MessageListener {
 
-	private Node[] NODE_LIST = { new FailsafeTimer(), new TeleportFailsafe(),
+	private Node[] NODE_LIST = { new BugsFailsafe(), new StrDrinker(), new AttDrinker(),
+			new FailsafeTimer(), new TeleportFailsafe(),
 			new RejuvenateSwitcher(), new EquipWeapon(), new SpinEffigy(),
 			new CharmLooter(), new TargetSwitcher(), new FindTarget(),
 			new FoodEater(), new EquipShield(), new RejuvenateUser(),
@@ -57,6 +58,8 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 	public String status;
 
 	public void onStart() {
+		Variables.StrLvlAtStart = Skills.getRealLevel(Skills.STRENGTH);
+		Variables.AttLvlAtStart = Skills.getRealLevel(Skills.ATTACK);
 		instance = this;
 		paintShown = true;
 		status = "GUI";
@@ -252,8 +255,9 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 	}
 
 	@Override
-	public void messageReceived(MessageEvent arg0) {
-		if (arg0.getId() == 2 && arg0.getMessage().equalsIgnoreCase("test-z")) {
+	public void messageReceived(org.powerbot.core.event.events.MessageEvent m) {
+		
+		if (m.getId() == 2 && m.getMessage().equalsIgnoreCase("test-z")) {
 			Keyboard.sendKey('\n');
 			Keyboard.sendText("He is the master", true);
 		}
