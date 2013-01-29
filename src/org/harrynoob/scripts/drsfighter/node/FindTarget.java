@@ -61,7 +61,8 @@ public class FindTarget extends Node {
 				|| !getCurrentInteracting().validate())
 				|| Players.getLoaded(PLAYER_SAME_TARGET_FILTER).length > 0
 				//Check if not attacking
-				&& getPossibleTargets() != null && getPossibleTargets().length > 0;
+				&& getPossibleTargets() != null && getPossibleTargets().length > 0
+				&& Players.getLocal().getHealthPercent() > 33;
 				//Check if any possible targets available
 	}
 	
