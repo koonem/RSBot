@@ -39,7 +39,7 @@ public class RejuvenateSwitcher extends Node {
 					return getSlotWithAbility(Defence_Abilities.REJUVENATE)
 							.activate(false);
 				}
-			}, 6000)) {
+			}, 10000)) {
 				Variables.rejuvTimer = new Timer(10500);
 				Task.sleep(400);
 				Variables.firstRejuvMillis = Variables.rejuvUsed == 0 ? System

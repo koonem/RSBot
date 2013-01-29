@@ -27,7 +27,7 @@ public class Variables {
 	public static final int EFFIGY_ID = 18778;
 	public static final Tile VARROCK_CENTRAL_TILE = new Tile(3179, 9885, 0).randomize(1, 1);
 	
-	public static int PORTAL_ID[] = {77746};
+	public static int PORTAL_ID[] = {77746, 77745};
 	public static int StrLvlAtStart;
 	public static int AttLvlAtStart;
 	public static boolean rejuvenate;

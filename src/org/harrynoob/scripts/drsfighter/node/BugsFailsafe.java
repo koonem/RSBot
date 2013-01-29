@@ -4,8 +4,8 @@ import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
-import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.wrappers.node.SceneObject;
+import org.harrynoob.api.Utilities;
 import org.harrynoob.scripts.drsfighter.misc.Variables;
 
 public class BugsFailsafe extends Node {
@@ -19,14 +19,15 @@ public class BugsFailsafe extends Node {
 	public void execute() {
 		SceneObject Portal = SceneEntities.getNearest(Variables.PORTAL_ID);
 
-		if (Portal != null) {
-			if (Portal.isOnScreen()) {
-				Portal.interact("Enter");
+		if (Portal != null && Portal.validate()) {
+			if (Utilities.isOnScreen(Portal)) {
+				Portal.hover();
+				Portal.interact("Enter", Portal.getDefinition().getName());
 				Task.sleep(1000, 2000);
 				while (Players.getLocal().isMoving())
 					Task.sleep(100, 200);
 			} else
-				Camera.turnTo(Portal);
+				Utilities.cameraTurnTo(Portal);
 		}
 	}
 }

@@ -33,13 +33,14 @@ import org.powerbot.game.api.wrappers.interactive.NPC;
 import org.powerbot.game.bot.Context;
 import org.powerbot.game.client.Client;
 
-@Manifest(name = "DRSFighter", topic = 899074, version = 1.19, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
+@Manifest(name = "DRSFighter", topic = 899074, version = 1.20, authors = "harrynoob", description = "Kills deadly red spiders. Supports weapon switching & charm looting & effigies & spintickets!", website = "http://www.powerbot.org/community/topic/882944-eoc-drsfighter-kills-deadly-red-spiders-great-xp/")
 public class DRSFighter extends ActiveScript implements PaintListener,
 		MouseListener, MessageListener {
 
-	private Node[] NODE_LIST = { new BugsFailsafe(), new StrDrinker(), new AttDrinker(),
-			new FailsafeTimer(), new TeleportFailsafe(),
-			new RejuvenateSwitcher(), new EquipWeapon(), new SpinEffigy(),
+	private Node[] NODE_LIST = { new BugsFailsafe(),
+			new RejuvenateSwitcher(), new EquipWeapon(),
+			new StrDrinker(), new AttDrinker(),
+			new FailsafeTimer(), new TeleportFailsafe(), new SpinEffigy(),
 			new CharmLooter(), new TargetSwitcher(), new FindTarget(),
 			new FoodEater(), new EquipShield(), new RejuvenateUser(),
 			new UltimateUser(), new ThresholdUser(), new AbilityUser() };
@@ -75,7 +76,7 @@ public class DRSFighter extends ActiveScript implements PaintListener,
 						System.out.println("Main created");
 						main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 						main.setLocationRelativeTo(null);
-						main.setTitle("DRSFighter v1.19");
+						main.setTitle("DRSFighter v1.20");
 						main.pack();
 						main.setVisible(true);
 					} catch (Exception e) {
