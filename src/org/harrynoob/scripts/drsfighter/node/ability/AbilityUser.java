@@ -1,4 +1,4 @@
-package org.harrynoob.scripts.drsfighter.node;
+package org.harrynoob.scripts.drsfighter.node.ability;
 
 import org.harrynoob.api.Actionbar;
 import org.harrynoob.api.Utilities;
