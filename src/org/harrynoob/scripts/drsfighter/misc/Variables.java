@@ -2,7 +2,9 @@ package org.harrynoob.scripts.drsfighter.misc;
 
 
 import org.harrynoob.scripts.drsfighter.gui.MainPanel;
+import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.methods.tab.Equipment.Slot;
 import org.powerbot.game.api.util.Filter;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Area;
@@ -87,12 +89,15 @@ public class Variables {
 	
 	private static Item getItemByName(final String n)
 	{
-		return n != null ? Inventory.getItem(new Filter<Item>(){
+		if(n == null) return null;
+		Item i = Inventory.getItem(new Filter<Item>(){
 
 			@Override
 			public boolean accept(Item arg0) {
 				return arg0.getName().equals(n);
 			}
-		}) : null;
+		});
+		return i != null ? i : (Equipment.getItem(Slot.WEAPON) != null
+				? Equipment.getItem(Slot.WEAPON) : Equipment.getItem(Slot.SHIELD) );
 	}	
 }

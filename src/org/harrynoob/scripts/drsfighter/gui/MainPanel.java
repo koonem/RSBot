@@ -16,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import org.harrynoob.scripts.drsfighter.misc.Variables;
+import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.methods.tab.Equipment.Slot;
 import org.powerbot.game.api.wrappers.node.Item;
 
 import static org.harrynoob.scripts.drsfighter.misc.Variables.bankLocations;
@@ -190,7 +192,13 @@ public class MainPanel extends JFrame implements WindowListener {
 					&& !s.contains(i.getName()))
 				s.add(i.getName());
 		}
-		return s.size() > 0 ? (String[]) s.toArray(new String[] { "nanana" })
+		if(Equipment.getItem(Slot.WEAPON) != null) {
+			s.add(Equipment.getCachedItem(Slot.WEAPON).getName());
+		}
+		if(Equipment.getItem(Slot.SHIELD) != null) {
+			s.add(Equipment.getCachedItem(Slot.SHIELD).getName());
+		}
+		return s.size() > 0 ? (String[]) s.toArray(new String[s.size()])
 				: null;
 	}
 

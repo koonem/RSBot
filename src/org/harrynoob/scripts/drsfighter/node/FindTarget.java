@@ -96,6 +96,11 @@ public class FindTarget extends Node {
 						}, 1000)) {
 					DRSFighter.getDebugger().logMessage("Attacking new target");
 					DRSFighter.instance.setCurrentTarget(newTarget);
+					new Thread(new Runnable() {
+						public void run() {
+							Camera.setPitch(true);
+						}
+					}).start();
 				}
 			}
 		} else {
