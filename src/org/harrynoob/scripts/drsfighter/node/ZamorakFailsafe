@@ -1,0 +1,41 @@
+package org.harrynoob.scripts.drsfighter.node;
+
+import org.harrynoob.api.Utilities;
+import org.harrynoob.scripts.drsfighter.misc.Variables;
+import org.powerbot.core.script.job.Task;
+import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Walking;
+import org.powerbot.game.api.methods.interactive.Players;
+import org.powerbot.game.api.methods.node.SceneEntities;
+import org.powerbot.game.api.wrappers.node.SceneObject;
+
+public class ZamorakFailsafe extends Node{
+
+  @Override
+	public boolean activate() {
+		
+		return Variables.ZamorakFailed.contains(Players.getLocal().getLocation());
+	}
+
+	@Override
+	public void execute() {
+		SceneObject Portal = SceneEntities.getAt(3241,5529);
+		if (Portal != null && Portal.validate()) {
+		 	 
+		     if (Utilities.isOnScreen(Portal)) {
+		 	 	
+		        Portal.hover();
+		 	 	
+		        Portal.click(true);
+				Task.sleep(1000, 2000);
+				while (Players.getLocal().isMoving())
+					Task.sleep(100, 200);
+			} else
+				Utilities.cameraTurnTo(Portal);
+		     Walking.newTilePath(Variables.ToZamoraks).traverse();
+		}
+		Walking.newTilePath(Variables.ToZamoraks).traverse();
+	}
+	
+}
+
