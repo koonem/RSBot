@@ -1,0 +1,22 @@
+package org.harrynoob.scripts.drsfighter.node;
+
+
+
+import org.harrynoob.scripts.drsfighter.misc.Variables;
+import org.powerbot.core.script.job.state.Node;
+import org.powerbot.game.api.methods.Walking;
+import org.powerbot.game.api.methods.interactive.Players;
+
+public class ZamorakFailsafe3 extends Node{
+
+  @Override
+	public boolean activate() {
+		
+		return Variables.ZamorakFailed3.contains(Players.getLocal().getLocation());
+	}
+
+	@Override
+	public void execute() {
+		Walking.newTilePath(Variables.ToZamoraks).traverse();
+		}
+	}
