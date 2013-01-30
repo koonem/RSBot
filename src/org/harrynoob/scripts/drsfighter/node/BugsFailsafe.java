@@ -17,12 +17,12 @@ public class BugsFailsafe extends Node {
 
 	@Override
 	public void execute() {
-		SceneObject Portal = SceneEntities.getNearest(Variables.PORTAL_ID);
+		SceneObject Portal = SceneEntities.getAt(3266,5552);
 
 		if (Portal != null && Portal.validate()) {
 			if (Utilities.isOnScreen(Portal)) {
 				Portal.hover();
-				Portal.interact("Enter", Portal.getDefinition().getName());
+				Portal.click(true);
 				Task.sleep(1000, 2000);
 				while (Players.getLocal().isMoving())
 					Task.sleep(100, 200);
