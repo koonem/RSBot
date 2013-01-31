@@ -42,13 +42,16 @@ import org.powerbot.game.client.Client;
 public class DRSFighter extends ActiveScript implements PaintListener,
 		MouseListener, MessageListener {
 
-	private Node[] NODE_LIST = { new BugsFailsafe(),
-			new RejuvenateSwitcher(), new EquipWeapon(),
-			new StrDrinker(), new AttDrinker(),
-			new FailsafeTimer(), new TeleportFailsafe(), new SpinEffigy(),
-			new CharmLooter(), new TargetSwitcher(), new FindTarget(),
-			new FoodEater(), new EquipShield(), new RejuvenateUser(),
-			new UltimateUser(), new ThresholdUser(), new AbilityUser() };
+	private Node[] NODE_LIST = { new RejuvenateSwitcher(), new EquipWeapon(),
+			new IceFailsafe(), new RockFailsafe(), new ZamorakFailsafe(),
+			new ZamorakFailsafe2(), new ZamorakFailsafe3(),
+			new FiregiantFailsafe2(), new FiregiantFailsafe(),
+			new MossFailsafe2(), new MossFailsafe(), new BugsFailsafe(),
+			new StrDrinker(), new AttDrinker(), new TeleportFailsafe(),
+			new EquipWeapon(), new SpinEffigy(), new CharmLooter(),
+			new TargetSwitcher(), new FindTarget(), new FoodEater(),
+			new EquipShield(), new RejuvenateUser(), new UltimateUser(),
+			new ThresholdUser(), new AbilityUser() };
 	public static DRSFighter instance;
 	public Debugger d;
 	public MainPanel main;
