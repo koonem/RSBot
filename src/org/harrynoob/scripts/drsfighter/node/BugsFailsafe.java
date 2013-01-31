@@ -23,17 +23,16 @@ public class BugsFailsafe extends Node {
 
 	@Override
 	public void execute() {
-		SceneObject portal = SceneEntities.getNearest(Variables.PORTAL_ID);
-
-		if (portal != null && portal.validate()) {
-			if (Utilities.isOnScreen(portal)) {
-				portal.hover();
-				portal.interact("Enter", portal.getDefinition().getName());
+		SceneObject Portal = SceneEntities.getAt(3266,5552);
+		if (Portal != null && Portal.validate()) {
+		     if (Utilities.isOnScreen(Portal)) {		 	 	
+		        Portal.hover();		 	 	
+		        Portal.click(true);
 				Task.sleep(1000, 2000);
 				while (Players.getLocal().isMoving())
 					Task.sleep(100, 200);
 			} else
-				Utilities.cameraTurnTo(portal);
+				Utilities.cameraTurnTo(Portal);
 		}
 	}
 }
